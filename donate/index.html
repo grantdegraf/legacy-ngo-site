@@ -57,15 +57,7 @@
       <section class="formWrap" id="donor-form">
         <h2>Your details (so we can thank you)</h2>
 
-        <iframe name="hidden_iframe" style="display:none;" aria-hidden="true"></iframe>
-
-        <form
-          id="donorForm"
-          class="form"
-          method="POST"
-          target="hidden_iframe"
-          action="APPS_SCRIPT_URL_PLACEHOLDER"
-        >
+        <form id="donate-form" class="form">
           <div class="grid">
             <label>
               <span>Name *</span>
@@ -114,22 +106,37 @@
   </div>
 
   <script>
-    (function () {
-      var FISCAL_SPONSOR_URL = 'https://nerlehoreinu.com/donate/';
-      var form = document.getElementById('donorForm');
-      var btn  = document.getElementById('submitBtn');
-      var msg  = document.getElementById('confirm');
+    const endpoint = "https://script.google.com/macros/s/AKfycbxWWAK6p3Pa-wx2ifO7lysbQEd0UCsa1QAA8ePw5S8p1C01WxsSmX0UYjWnWXOxelrb/exec";
 
-      form.addEventListener('submit', function (e) {
-        btn.disabled = true;
-        btn.textContent = 'Submitting\u2026';
-        msg.textContent = 'Thank you \u2014 redirecting\u2026';
-        // Give the hidden iframe ~900ms to receive the POST before we navigate away
-        setTimeout(function () {
-          window.location.href = FISCAL_SPONSOR_URL;
-        }, 900);
-      });
-    })();
+    async function submitDonationForm(e) {
+      e.preventDefault();
+
+      const form   = e.target;
+      const btn    = document.getElementById('submitBtn');
+      const msg    = document.getElementById('confirm');
+
+      btn.disabled    = true;
+      btn.textContent = 'Submitting\u2026';
+      msg.textContent = 'Thank you \u2014 redirecting\u2026';
+
+      const data = new FormData();
+      data.append('name',         form.name.value);
+      data.append('email',        form.email.value);
+      data.append('telephone',    form.telephone.value);
+      data.append('organization', form.organization.value);
+
+      try {
+        await fetch(endpoint, { method: 'POST', body: data });
+      } catch (err) {
+        // Non-blocking — proceed to redirect even if logging fails
+        console.warn('Logging error (non-fatal):', err);
+      }
+
+      window.location.href = 'https://nerlehoreinu.com/donate/';
+    }
+
+    document.querySelector('#donate-form')
+      .addEventListener('submit', submitDonationForm);
   </script>
 </body>
 </html>
