@@ -3,87 +3,359 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Women Without Fear | The Legacy Project</title>
-  <meta name="description" content="Women Without Fear is a cinematic book and series telling the true stories of Jewish women who resisted the Nazi regime.">
-  <meta name="keywords" content="Holocaust women resistance, Jewish female resistance WWII, Holocaust education series">
+  <title>The Legacy Project | Holocaust Education · Film · Combating Antisemitism</title>
+  <meta name="description" content="The Legacy Project produces documentary film, Holocaust education, and cultural storytelling that equips communities to confront antisemitism and carry history forward into action.">
+  <meta name="keywords" content="Holocaust education, documentary film, combating antisemitism, Women Without Fear, Legacy Project, Jewish resistance">
   <meta name="theme-color" content="#070b14">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Legacy Project">
+  <meta property="og:description" content="Holocaust education. Film production. Combating antisemitism. Support the work that turns history into action.">
+  <meta property="og:url" content="https://legacy.ngo/">
+  <meta property="og:image" content="assets/img/og-cover.jpg">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page">
+
+  <!-- FILM GRAIN OVERLAY -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#hero">The Legacy Project</a>
+      <ul class="nav__links">
+        <li><a href="#objectives">Objectives</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#wwf">Women Without Fear</a></li>
+        <li><a href="#support" class="nav__cta">Support Us</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <p class="overline">The Legacy Project</p>
+      <h1 class="hero__headline">THE LEGACY<br>PROJECT</h1>
+      <p class="hero__subhead">Holocaust education. Film production. Combating antisemitism.</p>
+      <p class="hero__body">
+        History is not a passive record. It is a set of decisions made under impossible conditions
+        by people who chose courage over survival. The Legacy Project exists to document those
+        decisions, translate them into film and education, and equip every generation that follows
+        to build something lasting on their foundation. Your support doesn&#8217;t just fund a project &#8212;
+        it creates your legacy in the work.
+      </p>
+      <div class="cta">
+        <a class="btn btn--gold" href="#wwf">Watch Trailer</a>
+        <a class="btn" href="donate/">Support the Project</a>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — OBJECTIVES
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="objectives">
     <div class="container">
+      <div class="section__header">
+        <p class="overline">What We Stand For</p>
+        <h2>Legacy Project Objectives</h2>
+      </div>
+      <ul class="objectives-list">
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Build narrative defenses against antisemitism.</strong>
+            Antisemitism does not retreat on its own &#8212; it requires structured, documented counter-narrative.
+            We produce the content and tools that communities need to push back with precision and conviction.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Produce documentaries and films that move audiences to understanding.</strong>
+            Cinema has always been where history becomes visceral. We make films that are rigorously
+            sourced and emotionally honest &#8212; built for broadcast, streaming, and educational distribution.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Translate Holocaust history into active education.</strong>
+            Knowledge without application is inert. Our education initiatives are designed to close
+            the distance between historical record and lived responsibility &#8212; in classrooms, institutions,
+            and communities.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Equip communities with content and tools they can use.</strong>
+            From curriculum-aligned materials to screening licenses and research frameworks, we build
+            resources designed for institutional adoption and long-term use.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Honor courage through real, documented stories.</strong>
+            Every subject in our work is verified. No composites. No invention. The record exists &#8212;
+            and the people in it deserve to have their stories told with the same precision and
+            care they brought to their own lives.
+          </div>
+        </li>
+        <li class="obj-item">
+          <span class="obj-icon" aria-hidden="true">&#9672;</span>
+          <div>
+            <strong>Create a legacy that outlasts the moment.</strong>
+            Donors who support this work are not funding a transaction &#8212; they are building something
+            that will be taught, screened, and cited long after the donation is made. That is the
+            architecture of lasting impact.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-      <header class="hero">
-        <p class="overline">The Legacy Project</p>
-        <h1>Women Without Fear</h1>
-        <p class="subhead">A book and 30-episode cinematic series restoring the documented stories of thirty Jewish women who actively resisted the Nazi regime between 1933 and 1945.</p>
-        <p class="micro">Thirty documented lives. One unfinished obligation.</p>
-        <div class="cta">
-          <a class="btn btn--gold" href="donate/">Donate</a>
-          <a class="btn" href="#support">Support This Work</a>
-          <a class="btn" href="mailto:grant@legacy.ngo?subject=Educational%20Partnership%20Inquiry">Inquire About Partnerships</a>
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — PROGRAMS
+  ═══════════════════════════════════════════ -->
+  <section class="section section--alt" id="programs">
+    <div class="container">
+      <div class="section__header">
+        <p class="overline">What We Do</p>
+        <h2>Program Pillars</h2>
+      </div>
+      <div class="pillars-grid">
+
+        <article class="pillar-card">
+          <div class="pillar-card__accent" aria-hidden="true"></div>
+          <h3>Holocaust Education</h3>
+          <p>
+            We develop curriculum-aligned materials, institutional frameworks, and public programming
+            that treat Holocaust history as an active obligation &#8212; not a fixed archive. Built for
+            schools, museums, and community organizations ready to go beyond remembrance into action.
+          </p>
+          <p class="pillar-card__tag">Educational materials &middot; Institutional licensing &middot; Public programming</p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-card__accent" aria-hidden="true"></div>
+          <h3>Film &amp; Documentary Production</h3>
+          <p>
+            Cinematic documentary production with global distribution in mind. Each project is
+            developed from verified historical sources and built for broadcast, streaming, and
+            educational licensing. Our films are designed to travel &#8212; and to last.
+          </p>
+          <p class="pillar-card__tag">Broadcast &middot; Streaming &middot; Educational licensing</p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-card__accent" aria-hidden="true"></div>
+          <h3>Combating Antisemitism</h3>
+          <p>
+            Antisemitism requires structured response &#8212; not only moral condemnation, but documented
+            counter-narrative and community-level tools. We produce content specifically designed
+            to equip institutions and individuals to recognize, name, and challenge it directly.
+          </p>
+          <p class="pillar-card__tag">Counter-narrative &middot; Community tools &middot; Institutional resources</p>
+        </article>
+
+        <article class="pillar-card pillar-card--upcoming">
+          <div class="pillar-card__accent" aria-hidden="true"></div>
+          <span class="pillar-card__badge">Upcoming</span>
+          <h3>Women on the Frontline</h3>
+          <p>
+            A new docu-series under the Legacy umbrella &#8212; in development. <em>Women on the Frontline</em>
+            expands the scope of our storytelling to women whose courage shaped history in contexts beyond
+            the Holocaust: conflict, leadership, and moral clarity in the face of impossible odds.
+          </p>
+          <p class="pillar-card__tag">In development &middot; 3-season series</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — WOMEN WITHOUT FEAR
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="wwf">
+    <div class="container">
+      <div class="section__header">
+        <p class="overline">Featured Project</p>
+        <h2>Women Without Fear<br><span class="h2-sub">Book &amp; Documentary Project</span></h2>
+      </div>
+
+      <div class="wwf-layout">
+
+        <!-- Book cover -->
+        <div class="wwf-cover">
+          <div class="book-cover" role="img" aria-label="Women Without Fear book cover">
+            <!-- To add real cover: replace this div contents with:
+                 <img src="assets/img/wwf-book-cover.jpg" alt="Women Without Fear — book cover" loading="lazy"> -->
+            <div class="book-cover__placeholder">
+              <p class="book-cover__title">Women<br>Without<br>Fear</p>
+              <p class="book-cover__byline">Grant de Graf</p>
+              <p class="book-cover__sub">Book &amp; Documentary Project</p>
+            </div>
+          </div>
         </div>
-      </header>
 
-      <section class="card">
-        <h2>The Urgency</h2>
-        <p>The last generation of direct witnesses is passing. As living testimony recedes, the obligation to document and transmit these accounts becomes more urgent — not less. Women Without Fear fills a documented gap in Holocaust historiography: the active, often organized resistance by Jewish women whose stories have been systematically overlooked in mainstream historical accounts.</p>
-        <p>These women made choices under the most extreme conditions in recorded history. Their strategies, networks, and courage shaped outcomes that are still incompletely understood. The record exists. This project ensures it is not lost.</p>
-        <p class="trust">Every subject is documented. No claims are invented. No stories are composite.</p>
-      </section>
-
-      <section class="card">
-        <h2>The Work</h2>
-        <div class="work-grid">
-          <article class="work-item">
-            <h3>The Book</h3>
-            <p>Thirty thoroughly researched biographies, each grounded in archival evidence, survivor testimonies, and published scholarship. Structured to serve both general readers and academic audiences, with full citations and a comprehensive appendix. Each chapter tells one life in full — the circumstances, the resistance, the cost, and the legacy.</p>
-          </article>
-          <article class="work-item">
-            <h3>The Series</h3>
-            <p>Thirty cinematic episodes — each a self-contained production dedicated to one subject. Drawn from the historical record to reconstruct moments of extraordinary courage with dignity and precision. Designed for broadcast, streaming, and educational licensing across institutional and public platforms.</p>
-          </article>
+        <!-- Text content -->
+        <div class="wwf-text">
+          <p>
+            <em>Women Without Fear</em> is a book and cinematic documentary series documenting
+            thirty Jewish women who actively resisted the Nazi regime between 1933 and 1945.
+            Each subject is drawn from the verified historical record &#8212; no composites, no invention.
+            These are real people who made real decisions under conditions designed to eliminate them,
+            and whose strategies, networks, and courage have been systematically underrepresented
+            in mainstream historical accounts.
+          </p>
+          <p>
+            The book presents thirty thoroughly researched biographies, each grounded in archival
+            evidence, survivor testimonies, and published scholarship. The documentary series adapts
+            each life into a self-contained cinematic episode, designed for broadcast, streaming,
+            and educational licensing globally. The series is produced to the standard of institutional
+            documentary &#8212; rigorous sourcing, precise reconstruction, dignity as a non-negotiable.
+          </p>
+          <p>
+            This work matters now because antisemitism is accelerating, the last generation of direct
+            witnesses is passing, and the documented record of Jewish women&#8217;s resistance is still
+            incompletely known. <em>Women Without Fear</em> closes that gap &#8212; for educators, for
+            cultural institutions, for donors who want their support to do something durable.
+          </p>
+          <div class="cta">
+            <a class="btn btn--gold" href="donate/">Support Women Without Fear</a>
+            <a class="btn" href="https://youtu.be/-tQENEqY0cQ?si=Z1otfk2ALx_zXU9e" target="_blank" rel="noopener">Watch Trailer &#8599;</a>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <h2>How Engagement Works</h2>
-        <ol class="steps">
-          <li>Send an inquiry to <a href="mailto:grant@legacy.ngo">grant@legacy.ngo</a> indicating your interest area — donor, education partner, or institutional partner.</li>
-          <li>We respond within a few business days with relevant materials: a project overview, series synopsis, or chapter sample as appropriate to your inquiry.</li>
-          <li>Formal engagement — we discuss terms for donation, licensing, or partnership based on your mandate and objectives.</li>
-        </ol>
-        <p class="trust">No solicitation. No spam. No pressure. We follow your lead.</p>
-      </section>
-
-      <section class="card">
-        <h2>Educational Partnerships</h2>
-        <p>Women Without Fear is actively seeking formal partnerships with Holocaust education organizations, museums, cultural institutions, foundations, and women’s leadership groups. The project offers curriculum-aligned materials, screening licenses, and collaborative research frameworks designed for institutional integration.</p>
-        <p>Engagement is available at multiple levels: educational licensing, co-presentation, curriculum development, and institutional sponsorship. Partnership inquiries are welcome from all sectors.</p>
-        <div class="cta">
-          <a class="btn" href="mailto:grant@legacy.ngo?subject=Educational%20Partnership%20Inquiry">Inquire About Partnerships</a>
+      <!-- YouTube embed -->
+      <div class="trailer-wrap">
+        <p class="trailer-label overline">Official Trailer</p>
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/-tQENEqY0cQ?si=Z1otfk2ALx_zXU9e"
+            title="Women Without Fear &#8212; Official Trailer"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
         </div>
-      </section>
-
-      <section class="card" id="support">
-        <h2>Support the Legacy</h2>
-        <p>The completion and distribution of this project depends on donors, philanthropic foundations, and institutional partners who understand the importance of preserving documented historical truth. Contributions fund research, production, translation, and educational distribution.</p>
-        <p>Donors who share the mission of Holocaust remembrance, women’s history, and Jewish cultural preservation are invited to engage directly. There is no minimum. There is no intermediary. There is only the work.</p>
-        <div class="cta">
-          <a class="btn btn--gold" href="donate/">Donate Now</a>
-          <a class="btn" href="mailto:grant@legacy.ngo?subject=Legacy%20Project%20Inquiry">Send an Inquiry</a>
-        </div>
-        <p class="trust">Your inquiry reaches the project directly. We respond personally.</p>
-      </section>
-
-      <footer class="footer">
-        The Legacy Project &bull; Women Without Fear &bull; <a href="mailto:grant@legacy.ngo">grant@legacy.ngo</a> &bull; &copy; 2026
-      </footer>
+      </div>
 
     </div>
-  </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5 — IMPACT / TRUST
+  ═══════════════════════════════════════════ -->
+  <section class="section section--alt" id="impact">
+    <div class="container">
+      <div class="section__header">
+        <p class="overline">Why It Works</p>
+        <h2>How We Operate</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <span class="trust-card__icon" aria-hidden="true">&#9635;</span>
+          <h3>Documentary-Grade Storytelling</h3>
+          <p>
+            Every subject is documented. Every claim is sourced. We do not produce impressionistic
+            history &#8212; we produce verified narrative, built to withstand scholarly scrutiny and
+            serve institutional audiences.
+          </p>
+        </div>
+        <div class="trust-card">
+          <span class="trust-card__icon" aria-hidden="true">&#9635;</span>
+          <h3>Action-Oriented Education</h3>
+          <p>
+            Our education work is not retrospective. It translates historical record into
+            current obligation &#8212; producing materials designed for active use in classrooms,
+            organizations, and community settings, not passive display.
+          </p>
+        </div>
+        <div class="trust-card">
+          <span class="trust-card__icon" aria-hidden="true">&#9635;</span>
+          <h3>Secure, Remote-First Operations</h3>
+          <p>
+            The Legacy Project operates with lean, distributed infrastructure. Donations go
+            directly into content production, distribution, and education &#8212; not overhead.
+            Operations are transparent by design.
+          </p>
+        </div>
+      </div>
+      <div class="partners-note">
+        <p>
+          The Legacy Project operates under fiscal sponsorship.
+          Donations are tax-deductible and processed securely through our fiscal sponsor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6 — SUPPORT / DONATE
+  ═══════════════════════════════════════════ -->
+  <section class="section section--support" id="support">
+    <div class="container">
+      <div class="support-inner">
+        <p class="overline">Support the Work</p>
+        <h2>Create Your Legacy</h2>
+        <p class="support-body">
+          The completion and global distribution of this work depends on donors who understand
+          that history does not carry itself forward. Contributions fund research, production,
+          translation, and educational distribution. There is no minimum. There is no intermediary.
+          There is only the work &#8212; and what it makes possible.
+        </p>
+        <div class="cta cta--center">
+          <a class="btn btn--gold btn--lg" href="donate/">Donate Now</a>
+          <a class="btn btn--lg" href="mailto:grant@legacy.ngo?subject=Legacy%20Project%20Inquiry">Send an Inquiry</a>
+        </div>
+        <div class="donor-callout">
+          <span class="donor-callout__label">Next step after donating</span>
+          <p class="donor-callout__text">
+            You&#8217;ll be taken to our sponsor&#8217;s secure donation page.
+            Please remember to choose <strong>&#8220;Other&#8221;</strong> and enter
+            <strong>The Legacy Project</strong> to ensure your gift is properly designated.
+          </p>
+        </div>
+        <p class="trust">Your inquiry reaches the project directly. We respond personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>The Legacy Project &bull; Women Without Fear (Book + Documentary) &bull; Women on the Frontline (In Development)</p>
+      <p>
+        <a href="mailto:grant@legacy.ngo">grant@legacy.ngo</a>
+        &bull; &copy; 2026 The Legacy Project
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
