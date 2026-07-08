@@ -505,6 +505,59 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Reliable in-page navigation.
+     Native `scroll-behavior: smooth` fails to scroll on this page in some browsers,
+     so we disable it and run our own requestAnimationFrame smooth scroll,
+     offset for the sticky header. */
+  (function () {
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    function headerOffset() {
+      var h = document.querySelector('header.nav');
+      return h ? h.getBoundingClientRect().height + 12 : 0;
+    }
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+    function scrollToY(targetY, duration) {
+      var startY = window.pageYOffset;
+      var maxY = document.documentElement.scrollHeight - window.innerHeight;
+      targetY = Math.max(0, Math.min(targetY, maxY));
+      var dist = targetY - startY, startTime = null;
+      if (Math.abs(dist) < 2) return;
+      function step(ts) {
+        if (startTime === null) startTime = ts;
+        var p = Math.min((ts - startTime) / duration, 1);
+        window.scrollTo(0, startY + dist * ease(p));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    function targetForHash(hash) {
+      var id = (hash || '').replace('#', '');
+      if (!id) return null;
+      var el = document.getElementById(id);
+      if (!el) return null;
+      return el.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var y = targetForHash(a.getAttribute('href'));
+        if (y === null) return;
+        e.preventDefault();
+        scrollToY(y, 600);
+        history.replaceState(null, '', a.getAttribute('href'));
+      });
+    });
+
+    /* Handle a deep link (e.g. legacy.ngo/#support) once the page has laid out. */
+    if (location.hash.length > 1) {
+      window.addEventListener('load', function () {
+        var y = targetForHash(location.hash);
+        if (y !== null) setTimeout(function () { window.scrollTo(0, y); }, 80);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
