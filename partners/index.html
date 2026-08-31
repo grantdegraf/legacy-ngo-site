@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate and Institutional Partnerships | The Legacy Project</title>
+<meta name="description" content="Partner with The Legacy Project to support publication, Holocaust education and the distribution of Women Without Fear to schools, museums and communities. Partnerships are discussed and tailored, not purchased.">
+
+<meta property="og:title" content="Corporate and Institutional Partnerships — The Legacy Project">
+<meta property="og:description" content="Support publication, Holocaust education and the distribution of Women Without Fear to schools, museums and communities.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://legacy.ngo/partners/">
+<meta property="og:site_name" content="The Legacy Project">
+<meta property="og:image" content="https://legacy.ngo/assets/img/og-cover.jpg?v=20260831">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corporate and Institutional Partnerships — The Legacy Project">
+<meta name="twitter:description" content="Support publication, Holocaust education and the distribution of Women Without Fear to schools, museums and communities.">
+<meta name="twitter:image" content="https://legacy.ngo/assets/img/og-cover.jpg?v=20260831">
+<meta name="theme-color" content="#1c1a17">
+
+<link rel="canonical" href="https://legacy.ngo/partners/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Shared design tokens (identical to legacy.ngo home) ── */
+  :root {
+    --ink: #1c1a17;
+    --ink-soft: #514c45;
+    --ink-faint: #6b6556;   /* 4.7:1 on the lightest ground it sits on */
+    --paper: #faf7f2;
+    --paper-2: #f3efe7;
+    --line: #e2dcd1;
+    --line-strong: #cbc3b5;
+    --accent: #7a2e1e;
+    --accent-hover: #6a2718;
+    --accent-soft: #f0e4df;
+    --gold: #7c6230;   /* 4.6:1 on --accent-soft, the lightest ground an eyebrow sits on */
+    --gold-on-ink: #c9a961;   /* 7.1:1 on --ink; --gold is for light grounds only */
+    --ink-card: #26231f;
+    --ink-line: #3a3630;
+    --ink-text: #ded6c9;
+    --radius: 8px;
+    --max: 1120px;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  em { font-style: italic; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; border-radius: var(--radius); padding: 10px 20px; cursor: pointer; transition: transform .06s ease, background .15s ease, border-color .15s ease; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-family: inherit; }
+  .btn:hover { border-color: var(--ink-faint); }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-ghost { border-color: transparent; background: var(--accent-soft); color: var(--accent); }
+  .btn-onink { border-color: #55504a; color: #f4efe7; background: transparent; }
+  .btn-onink:hover { border-color: var(--gold-on-ink); }
+  .btn-gold { background: var(--gold-on-ink); border-color: var(--gold-on-ink); color: #241c08; font-weight: 600; }
+  .btn-gold:hover { background: #d8bb75; border-color: #d8bb75; }
+  .btn svg { width: 16px; height: 16px; stroke: currentColor; }
+  .btn[disabled] { opacity: .6; cursor: not-allowed; }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-ink a:focus-visible,
+  .on-ink button:focus-visible { outline-color: var(--gold-on-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Nav ── */
+  header.nav { position: sticky; top: 0; z-index: 50; background: rgba(250,247,242,0.92); backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.2px; }
+  .brand .mark { width: 30px; height: 30px; border-radius: 7px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 16px; flex-shrink: 0; }
+  .brand small { color: var(--ink-faint); font-weight: 400; font-size: 12px; display: block; margin-top: -3px; }
+  .nav-links { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--ink-soft); }
+  .nav-links a { display: inline-flex; align-items: center; min-height: 44px; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+  .nav-cta { padding: 9px 18px; }
+
+  section { padding: 74px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
+  h1, h2 { font-family: var(--font-serif); font-weight: 500; line-height: 1.14; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(32px, 4.6vw, 52px); }
+  h2 { font-size: clamp(25px, 3.2vw, 36px); }
+  h3 { font-family: var(--font-serif); font-weight: 500; font-size: 20px; }
+  .lead { font-size: 18px; color: var(--ink-soft); }
+
+  /* ── Hero (dark, institutional) ── */
+  .p-hero { background: var(--ink); color: #f4efe7; border-bottom-color: var(--ink); padding: 54px 0 62px; }
+  .p-hero .eyebrow { color: var(--gold-on-ink); }
+  .p-hero h1 { color: #fff; max-width: 17ch; margin-bottom: 18px; }
+  .p-hero .lead { color: var(--ink-text); max-width: 54ch; font-size: 19px; }
+  .p-hero .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+  .p-hero .note { font-size: 14px; color: #a49a89; margin-top: 22px; max-width: 58ch; }
+  .p-hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 52px; align-items: center; }
+  .p-hero-aside { border: 1px solid var(--ink-line); background: var(--ink-card); border-radius: 14px; padding: 24px; }
+  .p-hero-aside img { width: 150px; border-radius: 6px; box-shadow: 0 16px 34px rgba(0,0,0,.45); margin-bottom: 20px; }
+  .glance { list-style: none; }
+  .glance li { padding: 9px 0; border-top: 1px solid var(--ink-line); font-size: 14px; color: var(--ink-text); }
+  .glance li:first-child { border-top: 0; padding-top: 0; }
+  .glance b { display: block; color: #fff; font-family: var(--font-serif); font-size: 17px; font-weight: 500; }
+  .crumb { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: #a49a89; margin-bottom: 26px; min-height: 44px; }
+  .crumb:hover { color: var(--gold-on-ink); }
+
+  /* ── Case ── */
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; margin-top: 32px; }
+  .case-item { display: flex; gap: 12px; }
+  .case-item .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); margin-top: 8px; flex-shrink: 0; }
+  .case-item p { font-size: 15px; color: var(--ink-soft); }
+  .case-item b { color: var(--ink); font-weight: 600; }
+
+  /* ── Outcome cards ── */
+  .outcomes { background: var(--paper-2); }
+  .out-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+  .out { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px 20px; }
+  .out h3 { font-size: 18px; margin-bottom: 7px; }
+  .out p { font-size: 14.5px; color: var(--ink-soft); }
+  .disclaimer { margin-top: 28px; font-size: 14px; color: var(--ink-soft); border-left: 3px solid var(--line-strong); padding-left: 14px; max-width: 74ch; }
+
+  /* ── Levels ── */
+  .levels { margin-top: 34px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+  .level { display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 22px 26px; border-bottom: 1px solid var(--line); align-items: start; }
+  .level:last-child { border-bottom: none; }
+  .level .amt { font-family: var(--font-serif); font-size: 17px; color: var(--accent); font-weight: 600; }
+  .level .from { display: block; font-family: var(--font-body); font-size: 13px; color: var(--ink-faint); font-weight: 400; letter-spacing: .02em; margin-top: 2px; }
+  .level p { font-size: 15px; color: var(--ink-soft); }
+  .levels-note { margin-top: 20px; font-size: 14.5px; color: var(--ink-soft); max-width: 74ch; }
+
+  /* ── Leadership gift block ── */
+  .leadership { border: 1px solid var(--line-strong); background: var(--accent-soft); border-radius: 14px; padding: 26px 28px; margin-top: 34px; }
+  .leadership h3 { margin-bottom: 8px; }
+  .leadership p { font-size: 15px; color: var(--ink-soft); max-width: 70ch; }
+  .leadership .btn { margin-top: 16px; }
+
+  /* ── Process ── */
+  .process { background: var(--paper-2); }
+  .steps4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 34px; counter-reset: s; }
+  .st { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .st .n { font-family: var(--font-serif); font-size: 24px; color: var(--gold); line-height: 1; }
+  .st h3 { font-size: 17px; margin: 8px 0 6px; }
+  .st p { font-size: 14px; color: var(--ink-soft); }
+
+  /* ── Governance (dark) ── */
+  .gov { background: var(--ink); color: #f4efe7; border-bottom-color: var(--ink); }
+  .gov .eyebrow { color: var(--gold-on-ink); }
+  .gov h2 { color: #fff; max-width: 22ch; }
+  .gov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin-top: 32px; }
+  .gov h3 { color: #fff; font-size: 18px; margin-bottom: 10px; }
+  .gov p, .gov li { color: var(--ink-text); font-size: 15px; }
+  .gov ul { list-style: none; }
+  .gov ul li { padding: 7px 0 7px 22px; position: relative; }
+  .gov ul li::before { content: ""; position: absolute; left: 0; top: 16px; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-on-ink); }
+  .pledge { margin-top: 34px; border: 1px solid var(--ink-line); background: var(--ink-card); border-radius: 12px; padding: 22px 24px; }
+  .pledge p { color: #f0ebe2; font-size: 15.5px; }
+  .pledge p + p { margin-top: 10px; color: var(--ink-text); font-size: 14.5px; }
+
+  /* ── Form ── */
+  .inq h2 { max-width: 22ch; }
+  .inq .lead { max-width: 66ch; margin-top: 12px; }
+  form.inq-form { margin-top: 34px; max-width: 860px; }
+  fieldset { border: 0; margin-bottom: 26px; }
+  legend { font-family: var(--font-serif); font-size: 18px; margin-bottom: 4px; padding: 0; }
+  .fs-hint { font-size: 14px; color: var(--ink-faint); margin-bottom: 16px; }
+  .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .f { display: flex; flex-direction: column; gap: 6px; }
+  .f.full { grid-column: 1 / -1; }
+  .f label { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .f .opt { color: var(--ink-faint); font-weight: 400; }
+  .req { color: var(--accent); }
+  .f input, .f select, .f textarea {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    background: #fff; border: 1px solid var(--line-strong); border-radius: var(--radius);
+    padding: 11px 12px; width: 100%; line-height: 1.5;
+  }
+  .f select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23514c45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 38px; }
+  .f textarea { min-height: 118px; resize: vertical; }
+  .f input:hover, .f select:hover, .f textarea:hover { border-color: var(--ink-faint); }
+  .f .hint { font-size: 13px; color: var(--ink-faint); }
+  .f .err { font-size: 13px; color: #9a2b18; font-weight: 500; display: none; }
+  .f.invalid input, .f.invalid select, .f.invalid textarea { border-color: #9a2b18; background: #fdf6f4; }
+  .f.invalid .err { display: block; }
+  .consent { display: flex; gap: 11px; align-items: flex-start; margin-top: 4px; }
+  .consent input { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; accent-color: var(--accent); }
+  .consent label { font-size: 14.5px; color: var(--ink-soft); font-weight: 400; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  #f-consent { margin-top: 6px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .form-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+  .form-actions .btn { font-size: 15px; padding: 13px 26px; }
+  .status { margin-top: 18px; font-size: 15px; border-radius: 10px; padding: 0; }
+  .status:not(:empty) { padding: 16px 18px; border: 1px solid var(--line); background: #fff; }
+  .status.ok:not(:empty) { border-color: #b9cdb4; background: #f2f7f0; color: #24421c; }
+  .status.bad:not(:empty) { border-color: #d9b3aa; background: #fdf4f2; color: #7a2418; }
+  .status a { text-decoration: underline; }
+  .status b { display: block; font-weight: 600; margin-bottom: 4px; }
+  .privacy-note { margin-top: 16px; font-size: 13.5px; color: var(--ink-faint); max-width: 70ch; }
+  .prefill { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-bottom: 26px; font-size: 15px; color: var(--ink); display: none; }
+  .prefill.on { display: block; }
+
+  /* ── Give-instead band ── */
+  .instead { background: var(--paper-2); text-align: center; }
+  .instead h2 { max-width: 24ch; margin: 0 auto 12px; }
+  .instead p { font-size: 16px; color: var(--ink-soft); max-width: 56ch; margin: 0 auto; }
+  .instead .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+
+  /* ── Footer ── */
+  footer { background: var(--paper); padding: 52px 0 40px; }
+  .foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  .foot-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .foot-links a { font-size: 14px; color: var(--ink-soft); display: inline-flex; align-items: center; min-height: 44px; }
+  .foot-links a:hover { color: var(--ink); }
+  /* The .foot-links colour would otherwise beat .btn-primary and leave the
+     footer button's label unreadable on the accent fill. */
+  .foot-links a.btn-primary, .foot-links a.btn-primary:hover { color: #fff; }
+  .foot-bottom { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-faint); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+  @media (max-width: 1040px) { .nav-links { gap: 16px; } }
+  @media (max-width: 900px) {
+    .p-hero-grid { grid-template-columns: 1fr; gap: 34px; }
+    .p-hero-aside { display: flex; gap: 22px; align-items: center; }
+    .p-hero-aside img { margin-bottom: 0; width: 118px; flex-shrink: 0; }
+    .glance { flex: 1; }
+    .out-grid { grid-template-columns: 1fr 1fr; }
+    .steps4 { grid-template-columns: 1fr 1fr; }
+    .gov-grid { grid-template-columns: 1fr; gap: 26px; }
+    .level { grid-template-columns: 1fr; gap: 6px; padding: 20px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 54px 0; }
+  }
+  @media (max-width: 620px) {
+    .out-grid { grid-template-columns: 1fr; }
+    .steps4 { grid-template-columns: 1fr; }
+    .f-grid { grid-template-columns: 1fr; }
+    .p-hero .cta .btn { width: 100%; justify-content: center; }
+    .p-hero-aside { flex-direction: column; align-items: flex-start; gap: 18px; }
+    .p-hero-aside img { width: 130px; }
+    .leadership, .pledge { padding: 20px; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Corporate and Institutional Partnerships",
+  "url": "https://legacy.ngo/partners/",
+  "description": "Corporate, foundation and institutional partnership with The Legacy Project, supporting publication, Holocaust education and the distribution of Women Without Fear.",
+  "isPartOf": { "@type": "WebSite", "name": "The Legacy Project", "url": "https://legacy.ngo/" },
+  "about": {
+    "@type": "NGO",
+    "name": "The Legacy Project",
+    "url": "https://legacy.ngo/",
+    "email": "info@legacy.ngo"
+  }
+}
+</script>
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/" aria-label="The Legacy Project home">
+      <span class="mark">L</span>
+      <span>The Legacy Project<small>legacy.ngo</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#project"><em>Women Without Fear</em></a>
+      <a href="/#support">Support</a>
+      <a href="/partners/" aria-current="page">Partners</a>
+      <a href="/#notify">Get the book</a>
+      <a href="mailto:info@legacy.ngo">Contact</a>
+      <a class="btn btn-primary nav-cta" href="/donate/">Make a Gift</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="p-hero on-ink">
+  <div class="wrap">
+    <a class="crumb" href="/#support">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Back to ways to support
+    </a>
+    <div class="p-hero-grid">
+      <div>
+        <p class="eyebrow">For companies, foundations and institutions</p>
+        <h1>Corporate and Institutional Partnerships</h1>
+        <p class="lead">Partner with The Legacy Project to support publication, Holocaust education and the distribution of <em>Women Without Fear</em> to schools, museums and communities.</p>
+        <div class="cta">
+          <a class="btn btn-gold" href="#inquiry">Discuss a Partnership</a>
+          <a class="btn btn-onink" href="#levels">See partnership levels</a>
+        </div>
+        <p class="note">Every partnership is developed in conversation and set out in writing. Nothing on this page is a checkout, and no commitment is made by either side until terms are agreed.</p>
+      </div>
+      <aside class="p-hero-aside" aria-label="The project at a glance">
+        <img src="/assets/img/wwf-book-cover.jpg?v=20260831" alt="Cover of Women Without Fear by Grant de Graf" width="150" height="225" loading="eager" decoding="async">
+        <ul class="glance">
+          <li><b>36</b> Jewish women, documented from the verified record</li>
+          <li><b>1933&ndash;45</b> the years the book covers</li>
+          <li><b>Manuscript complete</b> preparing for publication</li>
+          <li><b>Documentary</b> series in development</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CASE ============ -->
+<section id="case">
+  <div class="wrap">
+    <p class="eyebrow">The case for support</p>
+    <h2>A completed body of verified history, ready to reach classrooms</h2>
+    <p class="lead" style="max-width: 72ch; margin-top: 14px;"><em>Women Without Fear</em> gathers the researched biographies of thirty-six Jewish women who resisted the Nazi regime between 1933 and 1945 &mdash; fighters, rescuers, forgers and witnesses. Every subject is drawn from the verified historical record: archival evidence, survivor testimony and published scholarship. No composites, no invention. The manuscript is complete and preparing for publication; a documentary series is in development.</p>
+    <p class="lead" style="max-width: 72ch; margin-top: 16px;">What the project needs now is the means to finish it properly and put it into the hands of the people who will teach from it. That is what a partnership funds.</p>
+    <div class="case-grid">
+      <div class="case-item"><span class="dot"></span><p><b>Antisemitism is rising globally</b> &mdash; and institutions need historically reliable material to answer it.</p></div>
+      <div class="case-item"><span class="dot"></span><p><b>The last direct witnesses are passing</b>, taking living memory with them.</p></div>
+      <div class="case-item"><span class="dot"></span><p><b>Jewish women's resistance remains underrepresented</b> in mainstream historical accounts and in classroom material.</p></div>
+      <div class="case-item"><span class="dot"></span><p><b>Story and film reach young audiences</b> where a textbook does not &mdash; and the work is built for both.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section class="outcomes" id="outcomes">
+  <div class="wrap">
+    <p class="eyebrow">What a partnership can fund</p>
+    <h2>Support is directed to defined outcomes, agreed in advance</h2>
+    <div class="out-grid">
+      <div class="out">
+        <h3>Manuscript completion and publication</h3>
+        <p>Final editorial work, permissions and rights clearance, and the costs of bringing <em>Women Without Fear</em> to publication.</p>
+      </div>
+      <div class="out">
+        <h3>Educational resource development</h3>
+        <p>Teaching guides, discussion material and classroom-ready adaptations built from the verified source record.</p>
+      </div>
+      <div class="out">
+        <h3>Books for students, classrooms and museums</h3>
+        <p>Funded copies placed with schools, educators and cultural institutions rather than sold into them.</p>
+      </div>
+      <div class="out">
+        <h3>Geographic distribution programmes</h3>
+        <p>Concentrated distribution into a defined region, school district, country or institutional network.</p>
+      </div>
+      <div class="out">
+        <h3>Translation and curriculum development</h3>
+        <p>Translation into a target language, and adaptation of the material to a national curriculum framework.</p>
+      </div>
+      <div class="out">
+        <h3>Lectures, presentations and events</h3>
+        <p>Author presentations, screenings and educational events hosted with schools, museums and community organisations.</p>
+      </div>
+    </div>
+    <p class="disclaimer">These are the categories a partnership can be built around. Any figures &mdash; numbers of books, schools, territories or participants &mdash; are set as goals in the written partnership agreement and are described as goals, not as results already achieved. The Legacy Project does not publish counts of students reached, books distributed, participating museums or confirmed partners that it cannot evidence.</p>
+  </div>
+</section>
+
+<!-- ============ LEVELS ============ -->
+<section id="levels">
+  <div class="wrap">
+    <p class="eyebrow">Indicative levels</p>
+    <h2>Partnership levels are starting points for a conversation</h2>
+    <p class="lead" style="max-width: 70ch; margin-top: 14px;">The levels below indicate the scale at which each kind of programme becomes possible. They are not products, and there is no checkout. Scope, timing, outcomes and recognition are settled in discussion and recorded in a written agreement.</p>
+
+    <div class="levels">
+      <div class="level">
+        <div><span class="amt">Founding Partner<span class="from">from $25,000</span></span></div>
+        <p>Supports manuscript completion and publication, or the development of a defined educational resource.</p>
+      </div>
+      <div class="level">
+        <div><span class="amt">Education Partner<span class="from">from $50,000</span></span></div>
+        <p>Funds an educational programme: classroom materials together with the placement of books in schools and museums.</p>
+      </div>
+      <div class="level">
+        <div><span class="amt">National Distribution Partner<span class="from">from $100,000</span></span></div>
+        <p>Underwrites distribution into a defined country, region or institutional network, with an agreed delivery plan.</p>
+      </div>
+      <div class="level">
+        <div><span class="amt">Lead Legacy Partner<span class="from">$150,000 and above</span></span></div>
+        <p>Supports the project as a whole across publication, education and distribution, over a multi-year horizon.</p>
+      </div>
+      <div class="level">
+        <div><span class="amt">Bespoke Partnership<span class="from">developed around agreed outcomes</span></span></div>
+        <p>Built from the outcomes an organisation wants to achieve &mdash; a language, a territory, a curriculum, an institution &mdash; rather than from a figure.</p>
+      </div>
+    </div>
+    <p class="levels-note">Foundations and institutions working to their own grant cycles, application formats or reporting requirements are welcome to say so at the outset; the project works to the funder's process.</p>
+
+    <div class="leadership" id="leadership">
+      <h3>Leadership gifts from individuals and families</h3>
+      <p>A leadership gift of $10,000 or more can support a named educational or distribution initiative &mdash; a translation, a school programme, a region. Leadership gifts are discussed in the same way as institutional partnerships, and the same governance terms apply.</p>
+      <a class="btn btn-primary" href="?interest=leadership#inquiry">Discuss a Leadership Gift</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process" id="process">
+  <div class="wrap">
+    <p class="eyebrow">How a partnership is agreed</p>
+    <h2>Four steps, no obligation until it is in writing</h2>
+    <div class="steps4">
+      <div class="st">
+        <span class="n">1</span>
+        <h3>Inquiry</h3>
+        <p>You send the form below. It reaches The Legacy Project directly; nothing is charged and nothing is committed.</p>
+      </div>
+      <div class="st">
+        <span class="n">2</span>
+        <h3>Conversation</h3>
+        <p>A call to understand what your organisation wants to achieve and whether this project can achieve it.</p>
+      </div>
+      <div class="st">
+        <span class="n">3</span>
+        <h3>Written proposal</h3>
+        <p>A short document setting out scope, outcomes, timing, reporting and any recognition, for your review.</p>
+      </div>
+      <div class="st">
+        <span class="n">4</span>
+        <h3>Agreement</h3>
+        <p>Terms are agreed in writing, and funds are processed through the project's fiscal sponsor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GOVERNANCE ============ -->
+<section class="gov on-ink" id="governance">
+  <div class="wrap">
+    <p class="eyebrow">Recognition and governance</p>
+    <h2>What recognition can look like, and what it never affects</h2>
+    <div class="gov-grid">
+      <div>
+        <h3>Recognition developed by agreement</h3>
+        <p style="margin-bottom: 10px;">Depending on the partnership, recognition may be discussed in forms such as:</p>
+        <ul>
+          <li>Acknowledgement on legacy.ngo</li>
+          <li>Recognition in materials produced by The Legacy Project</li>
+          <li>Naming of a defined initiative, such as a distribution programme, a translation or an educational resource</li>
+          <li>Invitations to lectures, screenings and educational events</li>
+          <li>Written reporting on the outcomes the partnership funded</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What is not offered in advance</h3>
+        <p style="margin-bottom: 10px;">So that nothing is promised that cannot be honoured:</p>
+        <ul>
+          <li>Recognition inside a traditionally published edition of the book cannot be committed in advance, because it may require the publisher's agreement</li>
+          <li>No partnership carries editorial control, approval rights over historical content, or the right to review the text before publication</li>
+          <li>Exclusivity, category exclusivity and territorial rights are not offered as standard and exist only where separately agreed in writing</li>
+          <li>No partner name or logo is displayed by The Legacy Project without documented written permission</li>
+          <li>Tax treatment is a matter for the fiscal sponsor and your own advisers, not for this page</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pledge">
+      <p><strong>Partnership recognition is developed by agreement. Historical integrity and editorial independence remain with The Legacy Project.</strong></p>
+      <p>The Legacy Project operates under the fiscal sponsorship of Ner L'Horeinu, Inc., a U.S. 501(c)(3) organisation (Federal Tax ID 83-1635608). Gifts are processed by the fiscal sponsor, which issues receipts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INQUIRY FORM ============ -->
+<section class="inq" id="inquiry">
+  <div class="wrap">
+    <p class="eyebrow">Institutional inquiry</p>
+    <h2>Start a conversation</h2>
+    <p class="lead">Tell us who you are and what interests you. This form starts a discussion &mdash; it is not a donation, and no payment is taken here. We reply by email, normally within five business days.</p>
+
+    <div class="prefill" id="prefill" role="note"></div>
+
+    <form class="inq-form" id="partner-form" novalidate>
+      <fieldset>
+        <legend>Your organisation</legend>
+        <p class="fs-hint">Fields marked <span class="req">*</span> are required.</p>
+        <div class="f-grid">
+          <div class="f" id="f-orgName">
+            <label for="orgName">Organisation or foundation name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="orgName" name="orgName" autocomplete="organization" required aria-required="true" aria-describedby="orgName-err" maxlength="120">
+            <p class="err" id="orgName-err">Please enter the name of your organisation.</p>
+          </div>
+          <div class="f" id="f-orgType">
+            <label for="orgType">Organisation type <span class="req" aria-hidden="true">*</span></label>
+            <select id="orgType" name="orgType" required aria-required="true" aria-describedby="orgType-err">
+              <option value="">Please choose&hellip;</option>
+              <option>Corporation</option>
+              <option>Corporate foundation</option>
+              <option>Private or family foundation</option>
+              <option>Family office</option>
+              <option>Philanthropic individual or family</option>
+              <option>Educational institution</option>
+              <option>Museum or cultural institution</option>
+              <option>Other</option>
+            </select>
+            <p class="err" id="orgType-err">Please choose the option that fits best.</p>
+          </div>
+          <div class="f full" id="f-website">
+            <label for="website">Website <span class="opt">(optional)</span></label>
+            <input type="url" id="website" name="website" inputmode="url" placeholder="https://" autocomplete="url" aria-describedby="website-err website-hint" maxlength="200">
+            <p class="hint" id="website-hint">Helps us understand your work before we reply.</p>
+            <p class="err" id="website-err">Please enter a full web address, starting with http:// or https://</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your details</legend>
+        <div class="f-grid">
+          <div class="f" id="f-name">
+            <label for="name">Contact name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" aria-describedby="name-err" maxlength="100">
+            <p class="err" id="name-err">Please enter your name.</p>
+          </div>
+          <div class="f" id="f-contactTitle">
+            <label for="contactTitle">Title or role <span class="opt">(optional)</span></label>
+            <input type="text" id="contactTitle" name="contactTitle" autocomplete="organization-title" maxlength="100">
+          </div>
+          <div class="f" id="f-email">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" aria-describedby="email-err" maxlength="254">
+            <p class="err" id="email-err">Please enter an email address we can reply to.</p>
+          </div>
+          <div class="f" id="f-telephone">
+            <label for="telephone">Telephone <span class="opt">(optional)</span></label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel" maxlength="32">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What you have in mind</legend>
+        <p class="fs-hint">Indicative only. Nothing here commits you to anything.</p>
+        <div class="f-grid">
+          <div class="f" id="f-interest">
+            <label for="interest">Area of interest</label>
+            <select id="interest" name="interest">
+              <option value="Not sure yet">Not sure yet &mdash; happy to discuss</option>
+              <option>Publication</option>
+              <option>Educational materials</option>
+              <option>Book distribution</option>
+              <option>School or museum programming</option>
+              <option>Translation</option>
+              <option>Events or presentations</option>
+              <option>General project support</option>
+              <option>Bespoke partnership</option>
+            </select>
+          </div>
+          <div class="f" id="f-fundingRange">
+            <label for="fundingRange">Indicative funding range</label>
+            <select id="fundingRange" name="fundingRange">
+              <option value="Prefer to discuss">Prefer to discuss</option>
+              <option>Under $25,000</option>
+              <option>$25,000 &ndash; $50,000</option>
+              <option>$50,000 &ndash; $100,000</option>
+              <option>$100,000 &ndash; $150,000</option>
+              <option>$150,000 or more</option>
+            </select>
+          </div>
+          <div class="f full" id="f-partnershipForm">
+            <label for="partnershipForm">Proposed form of partnership <span class="opt">(optional)</span></label>
+            <input type="text" id="partnershipForm" name="partnershipForm" maxlength="160" placeholder="For example: grant, sponsorship, matched giving, in-kind support, multi-year commitment">
+          </div>
+          <div class="f full" id="f-message">
+            <label for="message">Message <span class="opt">(optional)</span></label>
+            <textarea id="message" name="message" maxlength="2000" placeholder="What would you like this support to achieve? Any timing, process or reporting requirements we should know about?"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="f" id="f-consent">
+        <div class="consent">
+          <input type="checkbox" id="consent" name="consent" value="yes" required aria-required="true" aria-describedby="consent-err">
+          <label for="consent">I consent to The Legacy Project contacting me by email about this inquiry. <span class="req" aria-hidden="true">*</span></label>
+        </div>
+        <p class="err" id="consent-err">Please tick the box so we know we may reply to you.</p>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="company-website">Leave this field empty</label>
+        <input type="text" id="company-website" name="company_website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit" id="submitBtn">Send inquiry</button>
+        <span class="hint" style="font-size:13.5px;color:var(--ink-faint);">No payment is taken on this form.</span>
+      </div>
+
+      <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+
+      <p class="privacy-note">Your details are recorded so that we can respond and are used only to reply to this inquiry and discuss a possible partnership. We do not sell or share them. To have them removed, email <a href="mailto:info@legacy.ngo" style="text-decoration:underline;">info@legacy.ngo</a>.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ GIVE INSTEAD ============ -->
+<section class="instead">
+  <div class="wrap">
+    <p class="eyebrow">Not an institution?</p>
+    <h2>Individual and family gifts are just as welcome</h2>
+    <p>Charitable gifts from individuals and families go through the project's fiscal sponsor and support the same work &mdash; research, publication, educational materials and distribution.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="/donate/">Make a Gift</a>
+      <a class="btn" href="/#support">See ways to support</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="/">
+        <span class="mark">L</span>
+        <span>The Legacy Project<small>legacy.ngo</small></span>
+      </a>
+      <div class="foot-links">
+        <a href="/#project"><em>Women Without Fear</em></a>
+        <a href="/#support">Support</a>
+        <a href="/partners/">Partners</a>
+        <a href="/#notify">Get the book</a>
+        <a href="mailto:info@legacy.ngo">Contact</a>
+        <a class="btn btn-primary nav-cta" href="/donate/">Make a Gift</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> The Legacy Project. Fiscal sponsor: Ner L'Horeinu, Inc. &mdash; 501(c)(3), EIN 83-1635608.</span>
+      <span>The Legacy Project &bull; <em>Women Without Fear</em> (book + documentary) &bull; info@legacy.ngo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   Institutional inquiry form.
+
+   Posts to the same Google Apps Script intake the donation page has always
+   used. No new service, no database, no key in this file: the endpoint is a
+   public write-only web app, exactly as before.
+
+   Two honesty rules govern this code:
+     1. Nothing here can know that a partnership, gift or payment happened,
+        so nothing here says one did. The confirmation says the inquiry was
+        received - that and no more.
+     2. If the request cannot be sent, the visitor is told so and given a
+        working email fallback with their answers preserved. No false success.
+   ══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxWWAK6p3Pa-wx2ifO7lysbQEd0UCsa1QAA8ePw5S8p1C01WxsSmX0UYjWnWXOxelrb/exec';
+  var CONTACT  = 'info@legacy.ngo';
+
+  var form   = document.getElementById('partner-form');
+  var btn    = document.getElementById('submitBtn');
+  var status = document.getElementById('formStatus');
+  if (!form) return;
+
+  /* ── Leadership-gift entry point: /partners/?interest=leadership#inquiry ── */
+  var inquiryType = 'partnership';
+  try {
+    var q = new URLSearchParams(window.location.search);
+    if ((q.get('interest') || '').toLowerCase() === 'leadership') {
+      inquiryType = 'leadership';
+      var pf = document.getElementById('prefill');
+      pf.textContent = 'You are enquiring about a leadership gift. Tell us which initiative interests you — a translation, a school programme, a region — and we will come back to you to discuss it.';
+      pf.classList.add('on');
+      document.getElementById('orgType').value = 'Philanthropic individual or family';
+      document.getElementById('interest').value = 'General project support';
+      document.getElementById('fundingRange').value = 'Prefer to discuss';
+      document.getElementById('orgName').value = '';
+      var lbl = document.querySelector('label[for="orgName"]');
+      if (lbl) lbl.innerHTML = 'Your name, family name or office <span class="req" aria-hidden="true">*</span>';
+    }
+  } catch (e) { /* URLSearchParams unsupported - form still works */ }
+
+  /* ── Validation ── */
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+
+  function setInvalid(id, bad) {
+    var w = document.getElementById('f-' + id);
+    var el = document.getElementById(id);
+    if (!w || !el) return;
+    w.classList.toggle('invalid', bad);
+    el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+  }
+
+  function validate() {
+    var bad = [];
+    var v = function (id) { return (document.getElementById(id).value || '').trim(); };
+
+    var checks = [
+      ['orgName',  v('orgName').length > 0],
+      ['name',     v('name').length > 0],
+      ['email',    EMAIL_RE.test(v('email'))],
+      ['orgType',  v('orgType').length > 0],
+      ['website',  v('website') === '' || /^https?:\/\/[^\s.]+\.[^\s]{2,}$/i.test(v('website'))],
+      ['consent',  document.getElementById('consent').checked]
+    ];
+    checks.forEach(function (c) {
+      setInvalid(c[0], !c[1]);
+      if (!c[1]) bad.push(c[0]);
+    });
+    return bad;
+  }
+
+  /* Clear a field's error as soon as the visitor fixes it. */
+  ['orgName', 'name', 'email', 'orgType', 'website', 'consent'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input',  function () { if (document.getElementById('f-' + id).classList.contains('invalid')) validate(); });
+    el.addEventListener('change', function () { if (document.getElementById('f-' + id).classList.contains('invalid')) validate(); });
+  });
+
+  /* ── Light client-side throttle. Real rate limiting is server-side. ── */
+  var sentAt = 0, sentCount = 0;
+  function throttled() {
+    var now = Date.now();
+    try {
+      var s = window.sessionStorage;
+      sentAt    = parseInt(s.getItem('lp_inq_at')  || '0', 10) || sentAt;
+      sentCount = parseInt(s.getItem('lp_inq_n')   || '0', 10) || sentCount;
+    } catch (e) { /* storage blocked - in-memory values still apply */ }
+    if (sentCount >= 4) return 'limit';
+    if (now - sentAt < 20000) return 'wait';
+    return '';
+  }
+  function markSent() {
+    sentAt = Date.now(); sentCount += 1;
+    try {
+      window.sessionStorage.setItem('lp_inq_at', String(sentAt));
+      window.sessionStorage.setItem('lp_inq_n',  String(sentCount));
+    } catch (e) { /* ignore */ }
+  }
+
+  function val(id) { return (document.getElementById(id).value || '').trim(); }
+
+  function buildSummary() {
+    var rows = [
+      ['Inquiry type',        inquiryType === 'leadership' ? 'Leadership gift (individual or family)' : 'Corporate / institutional partnership'],
+      ['Organisation',        val('orgName')],
+      ['Organisation type',   val('orgType')],
+      ['Website',             val('website')],
+      ['Contact',             val('name')],
+      ['Title or role',       val('contactTitle')],
+      ['Email',               val('email')],
+      ['Telephone',           val('telephone')],
+      ['Area of interest',    val('interest')],
+      ['Indicative range',    val('fundingRange')],
+      ['Proposed form',       val('partnershipForm')],
+      ['Consent to reply',    document.getElementById('consent').checked ? 'yes' : 'no']
+    ];
+    var out = rows.map(function (r) {
+      return r[0] + ': ' + (r[1] || '-');
+    });
+    out.push('');
+    out.push('Message:');
+    out.push(val('message') || '-');
+    return out.join('\n');
+  }
+
+  /* One line that survives even an intake that only records the four legacy
+     columns, so an inquiry can always be followed up. */
+  function buildDigest() {
+    return [val('orgName'), val('orgType'), val('interest'), val('fundingRange')]
+      .filter(Boolean).join(' | ');
+  }
+
+  function mailtoFallback() {
+    var subject = (inquiryType === 'leadership' ? 'Leadership gift inquiry' : 'Partnership inquiry') +
+                  ' - ' + (val('orgName') || val('name'));
+    return 'mailto:' + CONTACT +
+           '?subject=' + encodeURIComponent(subject) +
+           '&body='    + encodeURIComponent(buildSummary());
+  }
+
+  function show(kind, html) {
+    status.className = 'status ' + kind;
+    status.innerHTML = html;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    /* Honeypot: a real visitor never sees this field. Say nothing useful. */
+    if ((document.getElementById('company-website').value || '') !== '') {
+      show('ok', '<b>Thank you.</b>Your inquiry has been received.');
+      return;
+    }
+
+    var bad = validate();
+    if (bad.length) {
+      show('bad', '<b>Please check the highlighted fields.</b>' +
+                  bad.length + (bad.length === 1 ? ' field needs' : ' fields need') + ' attention before this can be sent.');
+      var first = document.getElementById(bad[0]);
+      if (first) first.focus();
+      return;
+    }
+
+    var t = throttled();
+    if (t === 'wait') {
+      show('bad', '<b>Just a moment.</b>Your last inquiry was sent a few seconds ago. Please wait before sending another.');
+      return;
+    }
+    if (t === 'limit') {
+      show('bad', '<b>That is several inquiries from this browser.</b>Please email <a href="mailto:' + CONTACT + '">' + CONTACT + '</a> instead and we will pick it up there.');
+      return;
+    }
+
+    var data = new FormData();
+    /* Legacy-compatible fields: these four are what the existing intake has
+       always recorded, so an inquiry is never lost even before the handler
+       is updated for partnership submissions. */
+    data.append('name',            val('name'));
+    data.append('email',           val('email'));
+    data.append('telephone',       val('telephone'));
+    data.append('organization',    buildDigest());
+    data.append('updates',         document.getElementById('consent').checked ? 'yes' : 'no');
+    /* Partnership fields. */
+    data.append('formType',        'partnership');
+    data.append('inquiryType',     inquiryType);
+    data.append('orgName',         val('orgName'));
+    data.append('orgType',         val('orgType'));
+    data.append('website',         val('website'));
+    data.append('contactTitle',    val('contactTitle'));
+    data.append('interest',        val('interest'));
+    data.append('fundingRange',    val('fundingRange'));
+    data.append('partnershipForm', val('partnershipForm'));
+    data.append('message',         val('message'));
+    data.append('consent',         document.getElementById('consent').checked ? 'yes' : 'no');
+    data.append('sourcePage',      '/partners/');
+    data.append('summary',         buildSummary());
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    show('', 'Sending your inquiry…');
+
+    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+      .then(function () {
+        markSent();
+        form.querySelectorAll('input, select, textarea').forEach(function (el) { el.disabled = true; });
+        btn.textContent = 'Inquiry sent';
+        show('ok',
+          '<b>Your inquiry has been received.</b>' +
+          'Thank you. A member of The Legacy Project will reply to <strong>' +
+          val('email').replace(/[<>&]/g, '') +
+          '</strong>, normally within five business days. ' +
+          'Nothing has been charged and no commitment has been made by either side. ' +
+          'If you need to add anything, email <a href="mailto:' + CONTACT + '">' + CONTACT + '</a>.');
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+        show('bad',
+          '<b>That did not send.</b>' +
+          'Your inquiry could not be delivered just now, so please assume it has not reached us. ' +
+          '<a href="' + mailtoFallback() + '">Send it by email instead</a> — your answers are already filled in — ' +
+          'or write to <a href="mailto:' + CONTACT + '">' + CONTACT + '</a>. You can also press Try again.');
+      });
+  });
+})();
+</script>
+</body>
+</html>
