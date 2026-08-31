@@ -103,6 +103,9 @@
   .nav-cta { padding: 9px 18px; }
 
   section { padding: 74px 0; border-bottom: 1px solid var(--line); }
+  /* Anchor targets must clear the 64px sticky header. The script below also
+     offsets, but this covers browsers that scroll before the script runs. */
+  section[id], #leadership, #main { scroll-margin-top: 84px; }
   .eyebrow { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
   h1, h2 { font-family: var(--font-serif); font-weight: 500; line-height: 1.14; letter-spacing: -0.01em; }
   h1 { font-size: clamp(32px, 4.6vw, 52px); }
@@ -681,6 +684,49 @@
   'use strict';
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── In-page navigation ────────────────────────────────────────────────
+     Same fix the home page carries. Native `scroll-behavior: smooth` does
+     not reliably scroll here - a fresh load of /partners/#levels stayed at
+     the top in Chrome - so scrolling is done explicitly, offset for the
+     sticky header, on click and on a deep link. */
+  (function () {
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    function headerOffset() {
+      var h = document.querySelector('header.nav');
+      return h ? h.getBoundingClientRect().height + 16 : 0;
+    }
+    function goTo(hash) {
+      var id = (hash || '').replace('#', '');
+      if (!id) return false;
+      var el = document.getElementById(id);
+      if (!el) return false;
+      var y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+      window.scrollTo(0, Math.max(0, y));
+      return true;
+    }
+
+    document.querySelectorAll('a[href^="#"], a[href^="?"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href') || '';
+        var hash = href.indexOf('#') > -1 ? href.slice(href.indexOf('#')) : '';
+        /* A link that only changes the query (the leadership CTA) would
+           reload the page; let it. Pure fragment links are handled here. */
+        if (href.charAt(0) !== '#') return;
+        if (goTo(hash)) {
+          e.preventDefault();
+          history.replaceState(null, '', hash);
+        }
+      });
+    });
+
+    if (location.hash.length > 1) {
+      window.addEventListener('load', function () {
+        setTimeout(function () { goTo(location.hash); }, 60);
+      });
+    }
+  })();
 
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxWWAK6p3Pa-wx2ifO7lysbQEd0UCsa1QAA8ePw5S8p1C01WxsSmX0UYjWnWXOxelrb/exec';
   var CONTACT  = 'info@legacy.ngo';
