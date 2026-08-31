@@ -170,12 +170,13 @@
   .partner-panel .kind { font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--gold-on-ink); font-weight: 600; }
   .partner-panel h3 { font-size: 24px; color: #fff; margin: 6px 0 10px; line-height: 1.2; }
   .partner-panel .blurb { font-size: 15px; color: var(--ink-text); }
-  .plevels { list-style: none; margin: 20px 0 0; border-top: 1px solid var(--ink-line); }
-  .plevels li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--ink-line); font-size: 14.5px; color: #f0ebe2; }
-  .plevels .n { font-weight: 500; }
-  .plevels .a { font-family: var(--font-serif); color: var(--gold-on-ink); font-size: 14.5px; white-space: nowrap; }
-  .pfunds { font-size: 14px; color: var(--ink-text); margin-top: 18px; }
-  .pfunds b { color: #fff; font-weight: 600; display: block; margin-bottom: 4px; }
+  .pways { list-style: none; margin: 20px 0 0; border-top: 1px solid var(--ink-line); }
+  .pways li { position: relative; padding: 9px 0 9px 18px; border-bottom: 1px solid var(--ink-line); font-size: 14.5px; color: #f0ebe2; line-height: 1.5; }
+  .pways li::before { content: ""; position: absolute; left: 0; top: 17px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-on-ink); }
+  .pways .n { font-weight: 500; }
+  .pways .d { color: var(--ink-text); font-weight: 400; }
+  .pwho { font-size: 14px; color: var(--ink-text); margin-top: 18px; }
+  .pwho b { color: #fff; font-weight: 600; display: block; margin-bottom: 4px; }
   .partner-panel .btn { margin-top: 22px; width: 100%; justify-content: center; font-size: 15px; padding: 13px 22px; }
   .btn-gold { background: var(--gold-on-ink); border-color: var(--gold-on-ink); color: #241c08; font-weight: 600; }
   .btn-gold:hover { background: #d8bb75; border-color: #d8bb75; }
@@ -497,7 +498,7 @@
 
         <div class="lead-gift">
           <p><b>Considering a leadership gift of $10,000 or more?</b> Contact us to discuss a named educational or distribution initiative.</p>
-          <a class="btn" href="/partners/?interest=leadership#inquiry">
+          <a class="btn" href="/partners/?interest=funding#leadership">
             Discuss a Leadership Gift
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -505,27 +506,31 @@
       </div>
 
       <!-- ── Pathway B: corporate, foundation and institutional ── -->
+      <!-- Institutions: an invitation to participate, not a price list. The
+           sponsorship levels live on /partners/ so that a museum with no
+           budget is not met by a funding ask on the home page. -->
       <aside class="partner-panel on-ink" aria-labelledby="partner-h">
-        <p class="kind">Companies, foundations and institutions</p>
-        <h3 id="partner-h">Corporate and Institutional Partnerships</h3>
-        <p class="blurb">Partner with The Legacy Project to support publication, Holocaust education and the distribution of <em>Women Without Fear</em> to schools, museums and communities.</p>
+        <p class="kind">Museums, educators and institutions</p>
+        <h3 id="partner-h">Join the Resistance Mission</h3>
+        <p class="blurb">Museums, Holocaust education centres, universities, book groups, archives and remembrance organizations are invited to help bring the stories of these 36 women to new generations.</p>
 
-        <ul class="plevels">
-          <li><span class="n">Founding Partner</span><span class="a">from $25,000</span></li>
-          <li><span class="n">Education Partner</span><span class="a">from $50,000</span></li>
-          <li><span class="n">National Distribution Partner</span><span class="a">from $100,000</span></li>
-          <li><span class="n">Lead Legacy Partner</span><span class="a">$150,000+</span></li>
-          <li><span class="n">Bespoke Partnership</span><span class="a">by agreement</span></li>
+        <ul class="pways">
+          <li><span class="n">Educate</span><span class="d"> &mdash; review materials, advise, pilot in classrooms</span></li>
+          <li><span class="n">Host</span><span class="d"> &mdash; a talk, a discussion, a public programme</span></li>
+          <li><span class="n">Read</span><span class="d"> &mdash; a reading group or advance-reader circle</span></li>
+          <li><span class="n">Distribute</span><span class="d"> &mdash; books to schools, libraries and museum shops</span></li>
+          <li><span class="n">Advise</span><span class="d"> &mdash; historical, archival and subject-matter direction</span></li>
+          <li><span class="n">Endorse or fund</span><span class="d"> &mdash; a letter of support, an introduction, sponsorship</span></li>
         </ul>
 
-        <p class="pfunds">
-          <b>A partnership can fund</b>
-          Manuscript completion and publication · educational-resource development · books for students, classrooms and museums · geographic distribution programmes · translation or curriculum development · lectures, presentations and educational events.
+        <p class="pwho">
+          <b>No cost, no obligation</b>
+          Most ways of participating cost nothing. Registering interest starts a conversation about what would suit your institution.
         </p>
 
-        <a class="btn btn-gold" href="/partners/">Discuss a Partnership</a>
-        <p class="tailored">An inquiry, not a checkout. Every partnership is tailored.</p>
-        <a class="more" href="/partners/">Read the partnership prospectus</a>
+        <a class="btn btn-gold" href="/partners/">Explore Institutional Partnerships</a>
+        <p class="tailored">An expression of interest, not a checkout. Every arrangement is tailored.</p>
+        <a class="more" href="/partners/#interest">Register your interest</a>
       </aside>
 
     </div>
@@ -612,7 +617,7 @@
     </div>
     <a class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;" href="/donate/">Make a Gift</a>
     <p class="contact-note">Questions before giving? Email <a href="mailto:info@legacy.ngo?subject=Legacy%20Project%20Donation%20Inquiry">info@legacy.ngo</a><br>
-      Enquiring on behalf of a company, foundation or institution? <a href="/partners/">Discuss a partnership</a></p>
+      From a museum, school, book group, archive or foundation? <a href="/partners/">Join the Resistance Mission</a></p>
   </div>
 </section>
 
