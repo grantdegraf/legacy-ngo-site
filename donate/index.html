@@ -15,7 +15,7 @@
   <div class="page">
     <div class="container">
 
-      <a class="breadcrumb" href="../">&larr; Back to Women Without Fear</a>
+      <a class="breadcrumb" href="/#support">&larr; Back to ways to support</a>
 
       <header class="hero">
         <h1>Shape the Narrative. Strengthen the Future.</h1>
@@ -30,6 +30,10 @@
         <div class="cta">
           <a class="btn btn--gold" href="#donor-form">Continue to Secure Donation</a>
         </div>
+        <!-- Filled in only when arriving from a gift level on the support page.
+             It records the level chosen; the amount itself is entered on the
+             sponsor's page, so this never claims a gift has been made. -->
+        <div class="selected" id="selectedLevel" hidden></div>
       </header>
 
       <section class="card">
@@ -98,8 +102,10 @@
       </section>
 
       <footer class="footer">
-        The Legacy Project &bull; Women Without Fear (Book + 30-episode series) &bull;
-        <a href="mailto:info@legacy.ngo">info@legacy.ngo</a>
+        The Legacy Project &bull; <em>Women Without Fear</em> (book + documentary) &bull;
+        <a href="mailto:info@legacy.ngo">info@legacy.ngo</a><br>
+        Enquiring for a company, foundation or institution?
+        <a href="/partners/">Discuss a partnership</a>
       </footer>
 
     </div>
@@ -107,6 +113,33 @@
 
   <script>
     const endpoint = "https://script.google.com/macros/s/AKfycbxWWAK6p3Pa-wx2ifO7lysbQEd0UCsa1QAA8ePw5S8p1C01WxsSmX0UYjWnWXOxelrb/exec";
+
+    /* Gift level carried over from the support page.
+       Only the five published levels are recognised; anything else in the
+       query string is ignored rather than rendered, so the parameter cannot
+       put attacker-chosen text on the page. The amount itself is still
+       entered on the sponsor's page - this only records what was chosen. */
+    const LEVELS = {
+      '250':  'Supporter',
+      '500':  'Patron',
+      '1000': 'Advocate',
+      '2500': 'Education Benefactor',
+      '5000': 'Founding Benefactor'
+    };
+    let selectedAmount = '';
+    let selectedName   = '';
+    try {
+      const raw = new URLSearchParams(window.location.search).get('amount') || '';
+      if (Object.prototype.hasOwnProperty.call(LEVELS, raw)) {
+        selectedAmount = raw;
+        selectedName   = LEVELS[raw];
+        const box = document.getElementById('selectedLevel');
+        box.textContent = 'Gift level selected: $' +
+          Number(raw).toLocaleString('en-US') + ' — ' + selectedName +
+          '. You enter the amount on the sponsor’s page in step 2.';
+        box.hidden = false;
+      }
+    } catch (err) { /* no query support - the page works unchanged */ }
 
     async function submitDonationForm(e) {
       e.preventDefault();
@@ -124,6 +157,11 @@
       data.append('email',        form.email.value);
       data.append('telephone',    form.telephone.value);
       data.append('organization', form.organization.value);
+      data.append('formType',     'donation');
+      if (selectedAmount) {
+        data.append('amount',    selectedAmount);
+        data.append('giftLevel', selectedName);
+      }
 
       try {
         await fetch(endpoint, { method: 'POST', body: data });
