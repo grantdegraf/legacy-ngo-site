@@ -164,41 +164,7 @@
   Sequence.prototype.at = function (ms, fn) { this.timers.push(setTimeout(fn, ms)); };
   Sequence.prototype.end = function () { this.host.classList.remove('seq-running'); this.cur = null; this.layers.forEach(function (l) { l.style.transitionDuration = '0ms'; l.classList.remove('on'); }); };
 
-  /* ---------- 3. Founder turnaround: turn 360, pause, turn again while in view ---------- */
-  var fs = document.getElementById('founder-turn');
-  if (fs) {
-    var fUrls = frameUrls(fs);
-    if (fUrls.length) {
-      var fseq = new Sequence(fs, fUrls), fBtn = fs.querySelector('.seq-replay');
-      var fIn = false, fOn = !reduce, fTimer = 0, fBusy = false;
-      var fLabel = function () { if (fBtn) fBtn.textContent = fOn ? 'Pause the turn' : 'Turn around'; };
-      var turnOnce = function (done) {
-        fseq.load(function () {
-          fseq.stop(); fBusy = true;
-          var step = 190, n = fUrls.length;
-          fseq.show(0, 0, true);
-          for (var k = 1; k <= n; k++) (function (k) { fseq.at(k * step, function () { fseq.show(k % n, 70, true); }); })(k);
-          fseq.at(n * step + 300, function () { fseq.end(); fBusy = false; done && done(); });
-        });
-      };
-      var loop = function () {
-        clearTimeout(fTimer);
-        if (!fOn || !fIn || document.hidden) return;
-        turnOnce(function () { fTimer = setTimeout(loop, 2600); });
-      };
-      if (fBtn) {
-        fBtn.hidden = false; fLabel();
-        fBtn.addEventListener('click', function () {
-          if (reduce) { if (!fBusy) turnOnce(); return; }
-          fOn = !fOn; fLabel();
-          if (fOn) loop(); else clearTimeout(fTimer);
-        });
-      }
-      watch(fs, 0, function (v) { if (v) fseq.load(); }, '600px 0px');
-      watch(fs, 0.5, function (v) { var was = fIn; fIn = v; if (v && !was && !fBusy) fTimer = setTimeout(loop, 500); if (!v) clearTimeout(fTimer); });
-      document.addEventListener('visibilitychange', function () { if (!document.hidden && fIn && !fBusy) loop(); });
-    }
-  }
+  /* ---------- 3. Founder: defined below as a scroll-linked camera move ---------- */
 
   /* ---------- 4. Family time-lapse ---------- */
   var fam = document.getElementById('family-lapse');
@@ -324,10 +290,10 @@
     if (torBtn) { torBtn.hidden = false; torBtn.addEventListener('click', function () { torDone = true; spin(); }); }
   }
 
-  /* ---------- 7. "Email dispatched": envelopes spin away below the notify button ---------- */
+  /* ---------- 7. Envelopes spin away below the notify button ---------- */
   var disp = document.getElementById('email-dispatch');
   if (disp) {
-    var envs = Array.prototype.slice.call(disp.querySelectorAll('.env')), stamp = disp.querySelector('.dispatch-stamp'), trails = disp.querySelectorAll('.dispatch-trails path');
+    var envs = Array.prototype.slice.call(disp.querySelectorAll('.env')), trails = disp.querySelectorAll('.dispatch-trails path');
     var paths = [ [-0.46, -0.20, 260], [0.44, -0.30, -200], [-0.22, -0.58, 120], [0.24, -0.62, -320], [-0.52, 0.18, 300], [0.52, 0.12, -240], [-0.05, -0.75, 200], [0.36, 0.30, -150], [-0.36, 0.34, 180] ];
     disp.classList.add('dispatch-js');
     var place = function (p) {
@@ -341,16 +307,48 @@
         e.style.opacity = (c01(q * 8) * (1 - 0.65 * c01((q - 0.85) / 0.15))).toFixed(3);
       });
       for (var j = 0; j < trails.length; j++) trails[j].style.strokeDashoffset = (1 - c01(p * 1.4 - j * 0.08)) * 1;
-      var sp = c01((p - 0.62) / 0.14);
-      stamp.style.opacity = sp.toFixed(3);
-      stamp.style.transform = 'translate(-50%,-50%) rotate(-7deg) scale(' + (1 + (1 - sm(sp)) * 0.3).toFixed(3) + ')';
-      disp.classList.toggle('dispatch-done', sp >= 1);
+      disp.classList.toggle('dispatch-done', p >= 1);
     };
     if (reduce) place(1);
     else addScroller(function (vh) {
       var c = layoutTop(disp) + disp.offsetHeight / 2 - window.pageYOffset;
       place(c01((vh * 1.0 - c) / (vh * 0.62)));
     });
+  }
+
+  /* ---------- 9. Founder: the camera moves about 15 degrees, left to right, as the section scrolls past ---------- */
+  var fdr = document.getElementById('founder-turn');
+  if (fdr && !reduce) {
+    addScroller(function (vh) {
+      var c = layoutTop(fdr) + fdr.offsetHeight / 2 - window.pageYOffset;
+      var t = sm(c01((vh * 1.05 - c) / (vh * 1.1)));          // 0 as it enters, 1 as it leaves
+      var ang = -7.5 + 15 * t;                                // camera swings from the left to the right
+      fdr.style.setProperty('--cam', (ang * -1).toFixed(2) + 'deg');
+      fdr.style.setProperty('--camx', (ang * 1.6).toFixed(1) + 'px');
+    });
+  }
+
+  /* ---------- 10. Roster portraits open a short biography ---------- */
+  var dlg = document.getElementById('w-dialog'), bioEl = document.getElementById('w-bios');
+  if (dlg && bioEl && typeof dlg.showModal === 'function') {
+    var BIOS = {}; try { BIOS = JSON.parse(bioEl.textContent); } catch (e) {}
+    var dImg = dlg.querySelector('.w-dialog-img'), dName = dlg.querySelector('#w-dialog-name'), dYears = dlg.querySelector('.w-dialog-years'), dBio = dlg.querySelector('.w-dialog-bio'), opener = null;
+    Array.prototype.forEach.call(document.querySelectorAll('#all-women .w-open'), function (btn) {
+      var nm = btn.querySelector('b').textContent.trim();
+      if (!BIOS[nm]) return;
+      btn.setAttribute('aria-label', nm + ', read her story');
+      btn.addEventListener('click', function () {
+        opener = btn;
+        dImg.src = btn.querySelector('img').getAttribute('src'); dImg.alt = 'Hedcut-style illustration of ' + nm;
+        dName.textContent = nm;
+        dYears.textContent = (btn.querySelector('.w-cap').textContent.replace(nm, '').trim());
+        dBio.textContent = BIOS[nm];
+        dlg.showModal();
+      });
+    });
+    dlg.querySelector('.w-dialog-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { if (opener) opener.focus(); });
   }
 
   /* ---------- 8. "Why now": the window closes as it scrolls into view; the text stays visible through the glass ---------- */
@@ -368,7 +366,7 @@
     if (reduce) setWin(1);
     else addScroller(function (vh) {
       var c = layoutTop(win) + win.offsetHeight / 2 - window.pageYOffset;
-      var p = c01((vh * 1.02 - c) / (vh * 0.5));
+      var p = c01((vh * 0.85 - c) / (vh * 0.65));
       setWin(1 - Math.pow(1 - p, 2.2));
     });
   }
