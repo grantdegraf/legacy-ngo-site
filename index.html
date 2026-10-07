@@ -145,6 +145,34 @@
   .w-dialog-note { font-size: 12px; color: var(--ink-faint); margin: 0; }
   .w-dialog-close { position: absolute; top: 8px; right: 10px; width: 44px; height: 44px; border: 0; background: none; font-size: 30px; line-height: 1; color: var(--ink-soft); cursor: pointer; }
   @media (max-width: 620px) { .w-dialog-body { grid-template-columns: 1fr; padding: 26px 20px; gap: 16px; } .w-dialog-img { width: 150px; } .w-dialog h3 { font-size: 24px; } }
+  .roster summary { list-style: none; }
+  .roster summary::-webkit-details-marker { display: none; }
+  .roster-cta { display: inline-flex; align-items: center; gap: 16px; padding: 14px 22px 14px 14px; border-radius: 999px; background: var(--accent, #7a2e1e); color: #fff;
+                font: 500 clamp(17px, 2.2vw, 22px)/1.25 var(--font-serif); box-shadow: 0 12px 28px rgba(122,46,30,.32); transition: transform .2s, box-shadow .2s; }
+  .roster summary:hover .roster-cta { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(122,46,30,.4); }
+  .roster-faces { display: inline-flex; flex-shrink: 0; }
+  .roster-faces img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; object-position: 50% 25%; border: 2px solid #fff; background: #fafafa; }
+  .roster-faces img + img { margin-left: -12px; }
+  .roster-chev { width: 22px; height: 22px; stroke: #fff; flex-shrink: 0; transition: transform .25s; }
+  .roster[open] .roster-chev { transform: rotate(180deg); }
+  .roster:not([open]) .roster-cta.cta-nudge { animation: roster-nudge 1.4s ease-in-out 3; }
+  @keyframes roster-nudge { 0%, 100% { transform: none; box-shadow: 0 12px 28px rgba(122,46,30,.32); } 50% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(122,46,30,.14), 0 16px 34px rgba(122,46,30,.4); } }
+  @media (max-width: 620px) { .roster-cta { gap: 10px; padding: 12px 16px 12px 10px; border-radius: 18px; } .roster-faces img { width: 34px; height: 34px; } }
+  @media (prefers-reduced-motion: reduce) { .roster-cta.cta-nudge { animation: none !important; } }
+
+  .swipe { display: block; width: 320px; max-width: 80%; margin: 30px auto 0; }
+  .swipe svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .swipe .sw-card { transform: translateX(-150px); opacity: 0; }
+  .swipe.sw-go .sw-card { animation: sw-card 2.3s cubic-bezier(.45,.05,.3,1) forwards; }
+  .swipe .sw-led { fill: #b23a2a; }
+  .swipe.sw-go .sw-led { animation: sw-led 2.3s step-end forwards; }
+  .swipe .sw-ok { opacity: 0; }
+  .swipe.sw-go .sw-ok { animation: sw-ok 2.3s ease-out forwards; }
+  @keyframes sw-card { 0% { transform: translateX(-170px); opacity: 0; } 12% { transform: translateX(-140px); opacity: 1; } 30% { transform: translateX(-140px); }
+                       72% { transform: translateX(150px); opacity: 1; } 88%, 100% { transform: translateX(210px); opacity: 0; } }
+  @keyframes sw-led { 0% { fill: #b23a2a; } 70%, 100% { fill: #2e8b57; } }
+  @keyframes sw-ok { 0%, 70% { opacity: 0; transform: translateY(4px); } 82%, 100% { opacity: 1; transform: none; } }
+  .swipe-static .sw-card { opacity: 0; } .swipe-static .sw-led { fill: #2e8b57; } .swipe-static .sw-ok { opacity: 1; }
   .roster-credits { margin-top: 22px; font-size: 13px; color: var(--ink-soft); }
   .roster-credits summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
   .roster-credits li { margin: 4px 0 4px 18px; }
@@ -772,7 +800,7 @@
     <div class="name-tornado" id="name-tornado" aria-hidden="true"></div>
     <button type="button" class="nt-replay" id="name-tornado-replay" hidden>Replay the names</button>
 
-    <details class="roster" id="all-women"><summary>See all 36 women featured in the book, with portraits</summary>
+    <details class="roster" id="all-women"><summary><span class="roster-cta"><span class="roster-faces" aria-hidden="true"><img src="/assets/img/women/roster/vitka-kempner.webp" alt=""><img src="/assets/img/women/roster/hannah-szenes.webp" alt=""><img src="/assets/img/women/roster/zivia-lubetkin.webp" alt=""></span><span class="roster-cta-text">See all 36 women featured in the book, with portraits</span><svg class="roster-chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></summary>
     <p class="w-roster-hint">Select a portrait to read her story.</p>
     <div class="names w-grid">
       <figure class="name-chip w-card"><button type="button" class="w-open" aria-haspopup="dialog"><img src="/assets/img/women/roster/vitka-kempner.webp" alt="" width="400" height="500" loading="lazy" decoding="async"><span class="w-cap"><b>Vitka Kempner</b> 1920–2012</span></button></figure>
@@ -1144,6 +1172,27 @@
       </div>
     </div>
     <a class="btn btn-primary" style="font-size: 15px; padding: 13px 28px;" href="/donate/">Make a Gift</a>
+    <div class="swipe" id="gift-swipe" aria-hidden="true"><svg viewBox="0 0 320 170">
+      <ellipse cx="160" cy="158" rx="130" ry="8" fill="rgba(0,0,0,.25)"/>
+      <rect x="40" y="70" width="240" height="14" rx="5" fill="#1b1c1e"/>
+      <g class="sw-card"><g transform="translate(110,22)">
+        <rect x="0" y="0" width="120" height="76" rx="8" fill="#7a2e1e"/>
+        <rect x="0" y="0" width="120" height="76" rx="8" fill="url(#sw-sheen)"/>
+        <rect x="14" y="14" width="22" height="17" rx="3" fill="#e2c27a"/>
+        <rect x="48" y="19" width="56" height="5" rx="2.5" fill="#fff" opacity=".6"/>
+        <rect x="14" y="40" width="70" height="4" rx="2" fill="#fff" opacity=".35"/>
+        <rect x="-62" y="8" width="40" height="44" rx="12" fill="#2b3a55"/>
+        <path d="M-26 6 C-12 -2 8 -2 20 6 L34 14 C42 19 40 29 30 29 L18 28 C24 33 22 42 14 42 L4 42 C8 48 4 56 -4 56 L-24 56 C-40 56 -50 44 -50 30 C-50 16 -40 10 -26 6 Z" fill="#d6a47c"/>
+        <path d="M-6 4 C8 1 22 4 30 12 C35 17 32 23 24 22 L-2 19 Z" fill="#e6b994"/>
+        <path d="M18 28 L-4 26 M14 42 L-6 40" stroke="#b9875f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      </g></g>
+      <rect x="34" y="78" width="252" height="74" rx="14" fill="#3a3c41"/>
+      <rect x="34" y="78" width="252" height="8" rx="4" fill="#55585e"/>
+      <rect x="56" y="98" width="132" height="34" rx="5" fill="#a9bba9"/>
+      <text class="sw-ok" x="122" y="120" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f3d2a">THANK YOU</text>
+      <circle class="sw-led" cx="252" cy="115" r="8"/>
+      <defs><linearGradient id="sw-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+    </svg></div>
     <p class="contact-note">Questions before giving? Email <a href="mailto:info@legacy.ngo?subject=Legacy%20Project%20Donation%20Inquiry">info@legacy.ngo</a><br>
       From a museum, school, book group, archive or foundation? <a href="/partners/">Join the Resistance Mission</a></p>
   </div>
@@ -1155,7 +1204,7 @@
     <p class="eyebrow">What one life becomes</p>
     <h2 id="generations-h">One portrait. Eighty years. Eighty people.</h2>
     <p class="lead gen-lead">Every life saved became a family. Remembering what was lost, and what survived, is a legacy that grows with each generation.</p>
-    <figure class="gen-figure" id="family-lapse" data-count="12" data-names="01,02,03,04,05,06,07,08,09,10,11,12" data-src="/assets/img/family/family-{n}.webp" data-years="1946,1946,1947,1952,1959,1966,1973,1981,1990,2000,2012,2026">
+    <figure class="gen-figure" id="family-lapse" data-count="14" data-names="02,03a,03b,03c,03,04,05,06,07,08,09,10,11,12" data-src="/assets/img/family/family-{n}.webp" data-years="1946,1947,1947,1947,1947,1952,1959,1966,1973,1981,1990,2000,2012,2026">
       <div class="seq-frames"><img class="seq-still" src="/assets/img/family/family-12.webp" alt="Illustration: an imagined family photograph of about eighty people of every age, from babies to great-grandparents, gathered on a lawn in front of a house" width="1200" height="800" loading="lazy" decoding="async"></div>
       <span class="gen-flash" aria-hidden="true"></span>
       <span class="gen-year" aria-hidden="true">1946</span>

@@ -185,16 +185,19 @@
           seq.stop(); cancelAnimationFrame(yearRaf);
           fam.classList.add('gen-playing');
           seq.show(0, 0, true); setYear(years[0]);
-          // the photographer's flash, then the camera fades away
-          seq.at(800, function () {
-            if (flash && flash.animate) flash.animate([{ opacity: 0 }, { opacity: 1, offset: 0.12 }, { opacity: 0 }], { duration: 650, easing: 'ease-out' });
+          // 1946: the groom alone. 1947: the photographer raises the flash, fires it (smoke held about a second), the smoke drifts, the couple remain.
+          seq.at(1300, function () { seq.show(1, 600, true); tweenYear(1946, 1947, 500); });
+          seq.at(2300, function () {
+            seq.show(2, 90, true);
+            if (flash && flash.animate) flash.animate([{ opacity: 0 }, { opacity: 0.9, offset: 0.1 }, { opacity: 0 }], { duration: 520, easing: 'ease-out' });
           });
-          seq.at(1500, function () { seq.show(1, 900, true); });
-          var t = 2500, rest = urls.length - 2, step = (10000 - t) / rest;
-          for (var k = 2; k < urls.length; k++) (function (k, at) {
+          seq.at(3350, function () { seq.show(3, 450, true); });
+          seq.at(4150, function () { seq.show(4, 800, true); });
+          var t = 5400, rest = urls.length - 5, step = (10800 - t) / rest;
+          for (var k = 5; k < urls.length; k++) (function (k, at) {
             seq.at(at, function () { seq.show(k, Math.min(520, step * 0.6), true); tweenYear(years[k - 1], years[k], step * 0.6); });
-          })(k, t + (k - 2) * step);
-          seq.at(10600, function () { fam.classList.remove('gen-playing'); setYear(years[years.length - 1]); seq.end(); });
+          })(k, t + (k - 5) * step);
+          seq.at(11400, function () { fam.classList.remove('gen-playing'); setYear(years[years.length - 1]); seq.end(); });
         });
       };
       if (famBtn) { famBtn.hidden = false; famBtn.addEventListener('click', play); }
@@ -350,6 +353,15 @@
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     dlg.addEventListener('close', function () { if (opener) opener.focus(); });
   }
+
+  /* ---------- 11. A card is swiped once below "Make a Gift"; the roster button gives a short nudge ---------- */
+  var swipe = document.getElementById('gift-swipe');
+  if (swipe) {
+    if (reduce) swipe.classList.add('swipe-static');
+    else { var swDone = false; watch(swipe, 0.6, function (v) { if (v && !swDone) { swDone = true; swipe.classList.add('sw-go'); } }); }
+  }
+  var rcta = document.querySelector('#all-women .roster-cta');
+  if (rcta && !reduce) { var rDone = false; watch(rcta, 0.9, function (v) { if (v && !rDone) { rDone = true; rcta.classList.add('cta-nudge'); } }); }
 
   /* ---------- 8. "Why now": the window closes as it scrolls into view; the text stays visible through the glass ---------- */
   var win = document.getElementById('why-window');
