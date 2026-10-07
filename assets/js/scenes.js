@@ -175,9 +175,9 @@
       var turnOnce = function (done) {
         fseq.load(function () {
           fseq.stop(); fBusy = true;
-          var step = 210, n = fUrls.length;
-          fseq.show(0, 0);
-          for (var k = 1; k <= n; k++) (function (k) { fseq.at(k * step, function () { fseq.show(k % n, 150); }); })(k);
+          var step = 190, n = fUrls.length;
+          fseq.show(0, 0, true);
+          for (var k = 1; k <= n; k++) (function (k) { fseq.at(k * step, function () { fseq.show(k % n, 70, true); }); })(k);
           fseq.at(n * step + 300, function () { fseq.end(); fBusy = false; done && done(); });
         });
       };
