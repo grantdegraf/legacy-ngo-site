@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Women Without Fear | 36 Women Who Resisted the Nazi Regime | The Legacy Project</title>
-<meta name="description" content="The Legacy Project produces Holocaust education, documentary films, and books preserving documented stories of resistance and rescue — including Women Without Fear, the stories of 36 women who resisted the Nazi regime.">
+<title>Women Without Fear | 36 Women Who Defied the Nazi Regime, 1933–1945 | The Legacy Project</title>
+<meta name="description" content="The Legacy Project produces Holocaust education, documentary films and books preserving documented stories of resistance and rescue, including Women Without Fear — the verified stories of 36 women who defied the Nazi regime, 1933–1945. Jewish resisters and non-Jewish rescuers.">
 
 <meta property="og:title" content="The Legacy Project — Women Without Fear">
-<meta property="og:description" content="Holocaust education and documentary storytelling: the verified stories of 36 women who resisted the Nazi regime.">
+<meta property="og:description" content="Women Without Fear — the verified stories of 36 women who defied the Nazi regime, 1933–1945. Jewish resisters and non-Jewish rescuers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://legacy.ngo/">
 <meta property="og:site_name" content="The Legacy Project">
 <meta property="og:image" content="https://legacy.ngo/assets/img/og-cover.jpg?v=20260831">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Legacy Project — Women Without Fear">
-<meta name="twitter:description" content="Holocaust education and documentary storytelling: the verified stories of 36 women who resisted the Nazi regime.">
+<meta name="twitter:description" content="Women Without Fear — the verified stories of 36 women who defied the Nazi regime, 1933–1945. Jewish resisters and non-Jewish rescuers.">
 <meta name="twitter:image" content="https://legacy.ngo/assets/img/og-cover.jpg?v=20260831">
 <meta name="theme-color" content="#1c1a17">
 
@@ -284,6 +284,73 @@
   }
   @media (max-width: 620px) { .story-grid { grid-template-columns: 1fr; } .story-card { padding: 22px; } .hero h1 { font-size: 3rem; } }
 
+  /* ---- Visual upgrade (Oct 2026): teaser video + portrait cards ---- */
+  .teaser { margin: 0; }
+  .teaser .frame16 { background: #000; }
+  .teaser-video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+  .teaser-caption { color: #cfc8bc; font-size: 14px; text-align: center; margin: 12px auto 0; max-width: 60ch; }
+  .teaser-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+  .btn-ghost-ink { background: transparent; color: #fff; border: 1px solid #6b655c; }
+  .btn-ghost-ink:hover { border-color: #fff; }
+  .teaser-actions .runtime { font-weight: 400; opacity: .85; margin-left: 4px; }
+  .teaser-status { color: #cfc8bc; font-size: 14px; text-align: center; min-height: 1.4em; margin-top: 10px; }
+  .trailer button:focus-visible, .trailer a:focus-visible, .trailer video:focus-visible { outline: 3px solid var(--gold-on-ink); outline-offset: 4px; }
+
+  .portrait-stage { position: relative; perspective: 1600px; }
+  .portrait-controls { display: flex; justify-content: flex-end; margin: -8px 0 10px; min-height: 0; }
+  .motion-toggle { font: 500 14px var(--font-sans, inherit); color: var(--ink-soft); background: transparent; border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+  .motion-toggle:hover { color: var(--ink); border-color: var(--ink-soft); }
+  .motion-toggle:focus-visible, .pcard a:focus-visible, .portrait-credits summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .portrait-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; align-items: start; }
+  .pcard { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 22px; height: 100%;
+           box-shadow: 0 14px 34px rgba(28,26,23,.10); transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease; }
+  .pcard-figure { margin: 0 0 16px; }
+  .pcard-figure img { display: block; width: 100%; max-width: 220px; height: auto; aspect-ratio: 257 / 399; object-fit: cover; margin: 0 auto;
+                      border-radius: 6px; border: 1px solid var(--line-strong); box-shadow: 0 10px 22px rgba(28,26,23,.22); background: var(--paper-2); }
+  .pcard-figure figcaption { font-size: 12.5px; line-height: 1.45; color: var(--ink-faint); margin-top: 10px; text-align: center; }
+  .pcard-figure figcaption a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .pcard-missing .pcard-monogram { width: 100%; max-width: 220px; aspect-ratio: 257 / 399; margin: 0 auto; border-radius: 6px; border: 1px dashed var(--line-strong);
+                      display: grid; place-items: center; font: 500 44px/1 var(--font-serif); color: var(--ink-faint); letter-spacing: .06em;
+                      background: repeating-linear-gradient(135deg, var(--paper) 0 10px, var(--paper-2) 10px 20px); }
+  .pcard .story-place { margin-bottom: 6px; font-size: 13px; }
+  .pcard h4 { font: 500 23px/1.25 var(--font-serif); margin-bottom: 2px; }
+  .pcard-dates { font-size: 14px; color: var(--ink-faint); margin-bottom: 12px; }
+  .pcard-story { font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); }
+  .pcard .story-action, .pcard .source-link { font-size: 14px; }
+  .portrait-credits { margin-top: 18px; font-size: 14px; color: var(--ink-soft); }
+  .portrait-credits summary { cursor: pointer; font-weight: 600; min-height: 44px; padding: 10px 0; color: var(--ink); }
+  .portrait-credits ul { margin: 6px 0 0 18px; display: grid; gap: 8px; max-width: 80ch; }
+  .portrait-credits a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Depth: only when JavaScript has enabled motion and the visitor allows it */
+  @media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
+    .motion-ready .portrait-cards > li:nth-child(1) .pcard { transform: rotateY(3deg) rotateZ(-1deg); }
+    .motion-ready .portrait-cards > li:nth-child(2) .pcard { transform: rotateY(1.5deg) rotateZ(0.8deg) translateY(16px); }
+    .motion-ready .portrait-cards > li:nth-child(3) .pcard { transform: rotateY(-1.5deg) rotateZ(-0.7deg) translateY(6px); }
+    .motion-ready .portrait-cards > li:nth-child(4) .pcard { transform: rotateY(-3deg) rotateZ(1deg) translateY(20px); }
+    .motion-ready .pcard:hover, .motion-ready .pcard:focus-within { transform: none; box-shadow: 0 22px 48px rgba(28,26,23,.18); }
+    .is-floating .pcard-figure img, .is-floating .pcard-monogram { animation: pcard-float 7s ease-in-out infinite; }
+    .is-floating .portrait-cards > li:nth-child(2) .pcard-figure > * { animation-delay: -1.8s; }
+    .is-floating .portrait-cards > li:nth-child(3) .pcard-figure > * { animation-delay: -3.5s; }
+    .is-floating .portrait-cards > li:nth-child(4) .pcard-figure > * { animation-delay: -5.2s; }
+    .is-floating .pcard:hover .pcard-figure > *, .is-floating .pcard:focus-within .pcard-figure > * { animation-play-state: paused; }
+  }
+  @keyframes pcard-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-7px) rotate(.4deg); } }
+  @media (max-width: 999px) { .portrait-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .portrait-controls { display: none; } }
+  @media (max-width: 620px) {
+    .portrait-cards { grid-template-columns: 1fr; gap: 16px; }
+    .pcard { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 16px; align-items: start; padding: 16px; }
+    .pcard-text { display: contents; }
+    .pcard-figure { margin: 0 0 14px; grid-column: 1; grid-row: 1 / 4; }
+    .pcard .story-place, .pcard h4, .pcard .pcard-dates { grid-column: 2; }
+    .pcard .pcard-story, .pcard .story-action, .pcard .source-link { grid-column: 1 / -1; }
+    .pcard-figure img, .pcard-missing .pcard-monogram { max-width: 112px; }
+    .pcard-missing .pcard-monogram { font-size: 28px; }
+    .pcard-figure figcaption { text-align: left; font-size: 12px; }
+    .pcard h4 { font-size: 21px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pcard, .pcard-figure img { transition: none; animation: none !important; transform: none !important; } }
+
 </style>
 
 <script type="application/ld+json">
@@ -305,7 +372,7 @@
       "author": { "@type": "Person", "name": "Grant de Graf" },
       "publisher": { "@id": "https://legacy.ngo/#organization" },
       "inLanguage": "en",
-      "about": "The verified stories of 36 women who resisted the Nazi regime, 1933-1945.",
+      "about": "The verified stories of 36 women who defied the Nazi regime, 1933–1945: Jewish resisters and non-Jewish rescuers.",
       "image": "https://legacy.ngo/assets/img/wwf-book-cover.jpg"
     }
   ]
@@ -352,8 +419,8 @@
     <div>
       <p class="kicker">Holocaust education and documentary storytelling</p>
       <h1>Women<br>Without Fear</h1>
-      <p class="lead">36 women who resisted the Nazi regime.</p>
-      <p class="sub">Fighters, rescuers, couriers and witnesses. Discover the lives of Jewish women who resisted persecution and non-Jewish women who risked their lives to help others.</p><p class="hero-status">By Grant de Graf · Manuscript complete; preparing for publication.</p>
+      <p class="lead">36 women who defied the Nazi regime, 1933–1945.</p>
+      <p class="sub">Jewish resisters and non-Jewish rescuers. Fighters, couriers, witnesses and women who risked their lives to save others.</p><p class="hero-status">By Grant de Graf · Manuscript complete; preparing for publication.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#women">Meet the women</a>
         <a class="btn" href="/sample/#p14">Read a sample chapter</a>
@@ -396,33 +463,86 @@
     <div id="women" class="women-intro">
       <p class="eyebrow">Meet the women</p>
       <h3>Four lives. Different forms of resistance.</h3>
-      <div class="story-grid">
-        <article class="story-card">
-          <p class="story-place">Auschwitz-Birkenau</p><h4>Róża Robota</h4>
-          <p>As part of the camp’s resistance network, she passed smuggled gunpowder to prisoners in the Sonderkommando. The explosives helped make their October 1944 revolt possible.</p>
-          <a class="story-action" href="/sample/#p14">Read her chapter</a>
-          <a class="source-link" href="https://encyclopedia.ushmm.org/content/en/timeline-event/holocaust/1942-1945/auschwitz-revolt">Historical reference: US Holocaust Memorial Museum</a>
-        </article>
-        <article class="story-card">
-          <p class="story-place">Bratislava</p><h4>Gisi Fleischmann</h4>
-          <p>A leading figure in the Bratislava Working Group, she helped organise rescue efforts and negotiations aimed at saving Jewish lives.</p>
-          <a class="story-action" href="https://wwv.yadvashem.org/YV/EN/EXHIBITIONS/communities/bratislava/working_group_activists.asp">Read the historical background at Yad Vashem</a>
-        </article>
-        <article class="story-card">
-          <p class="story-place">Warsaw Ghetto</p><h4>Rachel Auerbach</h4>
-          <p>A writer and member of the underground Oneg Shabbat archive, she helped preserve evidence of Jewish life under Nazi occupation. After the war, she helped recover part of the buried archive.</p>
-          <a class="story-action" href="https://encyclopedia.ushmm.org/content/en/article/the-oneg-shabbat-archive">Read the historical background at the US Holocaust Memorial Museum</a>
-        </article>
-        <article class="story-card">
-          <p class="story-place">Partisan resistance</p><h4>Faye Schulman</h4>
-          <p>A Jewish partisan, nurse and photographer, she documented life and resistance in the forests. Her photographs preserve evidence of the people with whom she served.</p>
-          <a class="story-action" href="https://encyclopedia.ushmm.org/content/en/article/faye-schulman">Read the historical background at the US Holocaust Memorial Museum</a>
-        </article>
+      <div class="portrait-stage">
+        <div class="portrait-controls"><button type="button" id="portrait-motion-toggle" class="motion-toggle" aria-pressed="false" hidden>Pause animation</button></div>
+        <ul class="portrait-cards" role="list">
+          <li>
+            <article class="pcard" id="woman-roza-robota" aria-labelledby="woman-roza-robota-name">
+              <figure class="pcard-figure">
+                <img src="/assets/img/women/roza-robota-charcoal.jpg" width="257" height="399" loading="lazy" decoding="async"
+                     alt="Róża Robota, head-and-shoulders portrait taken before 1939: a young woman with dark curly hair, smiling, in a patterned blouse.">
+                <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/roza-robota-original.jpg">Original photograph</a></figcaption>
+              </figure>
+              <div class="pcard-text">
+                <p class="story-place">Auschwitz-Birkenau</p>
+                <h4 id="woman-roza-robota-name">Róża Robota</h4>
+                <p class="pcard-dates">1921–1945</p>
+                <p class="pcard-story">At Auschwitz-Birkenau, Róża Robota helped organise the clandestine transfer of gunpowder from women working in the munitions factory to prisoners preparing resistance. The explosives supported the Sonderkommando revolt of 7 October 1944. Her contribution shows how cooperation and resolve could sustain resistance even within a killing centre.</p>
+                <a class="story-action" href="/sample/#p14">Read her chapter</a>
+                <a class="source-link" href="https://encyclopedia.ushmm.org/content/en/timeline-event/holocaust/1942-1945/auschwitz-revolt">Historical reference: US Holocaust Memorial Museum</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="pcard" id="woman-gisi-fleischmann" aria-labelledby="woman-gisi-fleischmann-name">
+              <figure class="pcard-figure">
+                <img src="/assets/img/women/gisi-fleischmann-charcoal.jpg" width="300" height="469" loading="lazy" decoding="async"
+                     alt="Gisi Fleischmann, studio portrait: a woman with dark, shoulder-length hair, wearing a dark top and a double strand of pearls.">
+                <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/gisi-fleischmann-original.jpg">Original photograph</a></figcaption>
+              </figure>
+              <div class="pcard-text">
+                <p class="story-place">Bratislava</p>
+                <h4 id="woman-gisi-fleischmann-name">Gisi Fleischmann</h4>
+                <p class="pcard-dates">1892–1944</p>
+                <p class="pcard-story">In Bratislava, Gisi Fleischmann helped lead the Working Group, an underground network that sought to protect Jews facing deportation. She helped raise funds, organise rescue efforts and negotiate with officials in an attempt to save lives. Her story reveals resistance through leadership, persistence and the difficult work of rescue.</p>
+                <a class="story-action" href="https://wwv.yadvashem.org/YV/EN/EXHIBITIONS/communities/bratislava/working_group_activists.asp">Read the historical background at Yad Vashem</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="pcard" id="woman-rachel-auerbach" aria-labelledby="woman-rachel-auerbach-name">
+              <figure class="pcard-figure pcard-missing" aria-label="Portrait not shown">
+                <div class="pcard-monogram" aria-hidden="true">RA</div>
+                <figcaption>Archival portrait not shown: reuse rights for a photograph have not yet been confirmed.</figcaption>
+              </figure>
+              <div class="pcard-text">
+                <p class="story-place">Warsaw Ghetto</p>
+                <h4 id="woman-rachel-auerbach-name">Rachel Auerbach</h4>
+                <p class="pcard-dates">1903–1976</p>
+                <p class="pcard-story">In the Warsaw ghetto, writer Rachel Auerbach contributed to the clandestine Oneg Shabbat archive, documenting Jewish life under Nazi persecution. By recording what she witnessed, she helped preserve a historical record the occupiers sought to erase. Her contribution demonstrates that testimony and the defence of memory were also forms of resistance.</p>
+                <a class="story-action" href="https://encyclopedia.ushmm.org/content/en/article/the-oneg-shabbat-archive">Read the historical background at the US Holocaust Memorial Museum</a>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="pcard" id="woman-faye-schulman" aria-labelledby="woman-faye-schulman-name">
+              <figure class="pcard-figure pcard-missing" aria-label="Portrait not shown">
+                <div class="pcard-monogram" aria-hidden="true">FS</div>
+                <figcaption>Archival portrait not shown: reuse rights for a photograph have not yet been confirmed.</figcaption>
+              </figure>
+              <div class="pcard-text">
+                <p class="story-place">Partisan resistance</p>
+                <h4 id="woman-faye-schulman-name">Faye Schulman</h4>
+                <p class="pcard-dates">1919–2021</p>
+                <p class="pcard-story">After surviving the destruction of her community, photographer Faye Schulman joined Soviet partisans. She served as a nurse and photographed life and resistance in the forests. Her images preserve evidence of Jewish participation in the partisan struggle, bringing together the work of survival, care and historical witness.</p>
+                <a class="story-action" href="https://encyclopedia.ushmm.org/content/en/article/faye-schulman">Read the historical background at the US Holocaust Memorial Museum</a>
+              </div>
+            </article>
+          </li>
+        </ul>
       </div>
+      <details class="portrait-credits">
+        <summary>Portrait sources and credits</summary>
+        <ul>
+          <li><b>Róża Robota</b>: photograph taken before 1939, photographer unknown. Via <a href="https://commons.wikimedia.org/wiki/File:Roza_Robota_(1921-1945).jpg">Wikimedia Commons</a>, where it is listed as public domain under Polish copyright law for photographs published before 1994 without a copyright notice. Details of its first publication are not confirmed. Tone treatment by The Legacy Project.</li>
+          <li><b>Gisi Fleischmann</b>: Fleischmann family archive, from the archive of Viera Kamenická, via <a href="https://commons.wikimedia.org/wiki/File:Gisi_Fleischmann.jpg">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Adapted (charcoal-style tone treatment) by The Legacy Project; the adaptation is shared under the same licence.</li>
+          <li>The charcoal-style images are tone treatments of the archival photographs. No features have been added, altered or generated.</li>
+        </ul>
+      </details>
       <p class="reference-note">These references provide historical background; linking to an institution does not imply its endorsement of the book or project.</p>
     </div>
 
-    <details class="roster"><summary>See all 36 women featured in the book</summary>
+    <details class="roster" id="all-women"><summary>See all 36 women featured in the book</summary>
     <div class="names">
       <span class="name-chip"><b>Vitka Kempner</b> 1920–2012</span>
       <span class="name-chip"><b>Zivia Lubetkin</b> 1914–1978</span>
@@ -476,9 +596,21 @@
   <div class="wrap">
     <p class="eyebrow">Official trailer</p>
     <h2>Watch the project trailer</h2>
-    <div class="frame16">
-      <iframe src="https://www.youtube.com/embed/TBrDfcHoMEY" title="Women Without Fear — official trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <figure class="teaser">
+      <div class="frame16">
+        <video id="wwf-teaser" class="teaser-video" muted playsinline controls preload="none" width="1280" height="720"
+               poster="/media/wwf-trailer-poster.jpg" aria-describedby="wwf-teaser-caption">
+          <source src="/media/wwf-teaser-20s.mp4" type="video/mp4">
+          <a href="/trailer/">Watch the full trailer</a>
+        </video>
+      </div>
+      <figcaption id="wwf-teaser-caption" class="teaser-caption">The opening 20 seconds of the trailer, muted. The full trailer runs 2 minutes 24 seconds with sound.</figcaption>
+    </figure>
+    <div class="teaser-actions">
+      <button type="button" id="wwf-teaser-toggle" class="btn btn-ghost-ink" hidden>Play preview</button>
+      <a class="btn btn-primary" href="/trailer/">Watch the full trailer <span class="runtime">(2:24)</span></a>
     </div>
+    <p id="wwf-teaser-status" class="teaser-status" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -760,5 +892,6 @@
   if(menu) menu.addEventListener('click',function(event){if(event.target.closest('a')) menu.open=false;});
 })();
 </script>
+<script src="/assets/js/home-visual.js?v=20261007" defer></script>
 </body>
 </html>
