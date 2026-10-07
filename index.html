@@ -126,6 +126,15 @@
   .names { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
   .name-chip { font-size: 13px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 7px 14px; color: var(--ink-soft); }
   .name-chip b { color: var(--ink); font-weight: 500; }
+  .w-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 18px 14px; }
+  .w-card { margin: 0; border: 0; background: none; border-radius: 0; padding: 0; text-align: center; font-size: 13px; color: var(--ink-soft); }
+  .w-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: #fafafa; border-radius: 6px; box-shadow: 0 6px 16px rgba(28,26,23,.10); margin-bottom: 8px; }
+  .w-card b { display: block; color: var(--ink); font-weight: 500; line-height: 1.3; }
+  .roster-credits { margin-top: 22px; font-size: 13px; color: var(--ink-soft); }
+  .roster-credits summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
+  .roster-credits li { margin: 4px 0 4px 18px; }
+  .roster-credits a { text-decoration: underline; }
+  @media (max-width: 520px) { .w-grid { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; } .w-card { font-size: 12px; } }
   .handoff { display: inline-flex; align-items: center; gap: 7px; margin-top: 26px; color: var(--accent); font-weight: 500; font-size: 15px; }
   .handoff svg { width: 17px; height: 17px; stroke: currentColor; }
 
@@ -749,45 +758,81 @@
     <div class="name-tornado" id="name-tornado" aria-hidden="true"></div>
     <button type="button" class="nt-replay" id="name-tornado-replay" hidden>Replay the names</button>
 
-    <details class="roster" id="all-women"><summary>See all 36 women featured in the book</summary>
-    <div class="names">
-      <span class="name-chip"><b>Vitka Kempner</b> 1920–2012</span>
-      <span class="name-chip"><b>Zivia Lubetkin</b> 1914–1978</span>
-      <span class="name-chip"><b>Haika Grossman</b> 1919–1996</span>
-      <span class="name-chip"><b>Rozka Korczak-Marla</b> 1921–1988</span>
-      <span class="name-chip"><b>Faye Schulman</b> 1919–2021</span>
-      <span class="name-chip"><b>Rachel Auerbach</b> 1903–1976</span>
-      <span class="name-chip"><b>Tosia Altman</b> 1918–1943</span>
-      <span class="name-chip"><b>Masha Bruskina</b> 1924–1941</span>
-      <span class="name-chip"><b>Frumka Płotnicka</b> 1914–1943</span>
-      <span class="name-chip"><b>Irena Sendler</b> 1910–2008</span>
-      <span class="name-chip"><b>Mira Fuchrer</b> 1920–1943</span>
-      <span class="name-chip"><b>Hannah Szenes</b> 1921–1944</span>
-      <span class="name-chip"><b>Gisi Fleischmann</b> 1892–1944</span>
-      <span class="name-chip"><b>Gusta Davidson Draenger</b> 1917–1943</span>
-      <span class="name-chip"><b>Luba Tryszynska-Frederick</b> 1918–2009</span>
-      <span class="name-chip"><b>Lonka Korzybrodska</b> 1917–1943</span>
-      <span class="name-chip"><b>Sara Ginaite-Rubinson</b> 1924–2018</span>
-      <span class="name-chip"><b>Havivah Reik</b> 1914–1944</span>
-      <span class="name-chip"><b>Noemi Szac-Wajnkranc</b> 1919–1945</span>
-      <span class="name-chip"><b>Judith Grunfeld</b> 1902–1998</span>
-      <span class="name-chip"><b>Chajka Klinger</b> 1917–1958</span>
-      <span class="name-chip"><b>Sabina Zlatin</b> 1907–1996</span>
-      <span class="name-chip"><b>Luba Bielicka Blum</b> 1905–1973</span>
-      <span class="name-chip"><b>Andrée Geulen-Herscovici</b> 1921–2022</span>
-      <span class="name-chip"><b>Róża Robota</b> 1921–1945</span>
-      <span class="name-chip"><b>Ella Gärtner</b> 1912–1945</span>
-      <span class="name-chip"><b>Regina Safirsztajn</b> 1915–1945</span>
-      <span class="name-chip"><b>Recha Sternbuch</b> 1905–1971</span>
-      <span class="name-chip"><b>Vladka Meed</b> 1921–2012</span>
-      <span class="name-chip"><b>Renia Kukielka</b> 1924–2014</span>
-      <span class="name-chip"><b>Viola Stern Fischerová</b> 1922–2017</span>
-      <span class="name-chip"><b>Ella Lingens-Reiner</b> 1908–2002</span>
-      <span class="name-chip"><b>Hilde Meisel (Hilda Monte)</b> 1914–1945</span>
-      <span class="name-chip"><b>Rosa Jochmann</b> 1901–1994</span>
-      <span class="name-chip"><b>Irene Harand</b> 1900–1975</span>
-      <span class="name-chip"><b>Muriel Gardiner</b> 1901–1985</span>
+    <details class="roster" id="all-women"><summary>See all 36 women featured in the book, with portraits</summary>
+    <div class="names w-grid">
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/vitka-kempner.webp" alt="Hedcut-style illustration of Vitka Kempner" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Vitka Kempner</b> 1920–2012</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/zivia-lubetkin.webp" alt="Hedcut-style illustration of Zivia Lubetkin" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Zivia Lubetkin</b> 1914–1978</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/haika-grossman.webp" alt="Hedcut-style illustration of Haika Grossman" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Haika Grossman</b> 1919–1996</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/rozka-korczak.webp" alt="Hedcut-style illustration of Rozka Korczak-Marla" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Rozka Korczak-Marla</b> 1921–1988</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/faye-schulman.webp" alt="Hedcut-style illustration of Faye Schulman" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Faye Schulman</b> 1919–2021</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/rachel-auerbach.webp" alt="Hedcut-style illustration of Rachel Auerbach" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Rachel Auerbach</b> 1903–1976</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/tosia-altman.webp" alt="Hedcut-style illustration of Tosia Altman" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Tosia Altman</b> 1918–1943</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/masha-bruskina.webp" alt="Hedcut-style illustration of Masha Bruskina" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Masha Bruskina</b> 1924–1941</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/frumka-plotnicka.webp" alt="Hedcut-style illustration of Frumka Płotnicka" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Frumka Płotnicka</b> 1914–1943</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/irena-sendler.webp" alt="Hedcut-style illustration of Irena Sendler" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Irena Sendler</b> 1910–2008</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/mira-fuchrer.webp" alt="Hedcut-style illustration of Mira Fuchrer" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Mira Fuchrer</b> 1920–1943</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/hannah-szenes.webp" alt="Hedcut-style illustration of Hannah Szenes" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Hannah Szenes</b> 1921–1944</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/gisi-fleischmann.webp" alt="Hedcut-style illustration of Gisi Fleischmann" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Gisi Fleischmann</b> 1892–1944</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/gusta-davidson-draenger.webp" alt="Hedcut-style illustration of Gusta Davidson Draenger" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Gusta Davidson Draenger</b> 1917–1943</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/luba-tryszynska-frederick.webp" alt="Hedcut-style illustration of Luba Tryszynska-Frederick" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Luba Tryszynska-Frederick</b> 1918–2009</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/lonka-korzybrodska.webp" alt="Hedcut-style illustration of Lonka Korzybrodska" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Lonka Korzybrodska</b> 1917–1943</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/sara-ginaite-rubinson.webp" alt="Hedcut-style illustration of Sara Ginaite-Rubinson" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Sara Ginaite-Rubinson</b> 1924–2018</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/havivah-reik.webp" alt="Hedcut-style illustration of Havivah Reik" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Havivah Reik</b> 1914–1944</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/noemi-szac-wajnkranc.webp" alt="Hedcut-style illustration of Noemi Szac-Wajnkranc" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Noemi Szac-Wajnkranc</b> 1919–1945</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/judith-grunfeld.webp" alt="Hedcut-style illustration of Judith Grunfeld" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Judith Grunfeld</b> 1902–1998</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/chajka-klinger.webp" alt="Hedcut-style illustration of Chajka Klinger" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Chajka Klinger</b> 1917–1958</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/sabina-zlatin.webp" alt="Hedcut-style illustration of Sabina Zlatin" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Sabina Zlatin</b> 1907–1996</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/luba-bielicka-blum.webp" alt="Hedcut-style illustration of Luba Bielicka Blum" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Luba Bielicka Blum</b> 1905–1973</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/andree-geulen-herscovici.webp" alt="Hedcut-style illustration of Andrée Geulen-Herscovici" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Andrée Geulen-Herscovici</b> 1921–2022</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/roza-robota.webp" alt="Hedcut-style illustration of Róża Robota" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Róża Robota</b> 1921–1945</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/ella-gartner.webp" alt="Hedcut-style illustration of Ella Gärtner" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Ella Gärtner</b> 1912–1945</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/regina-safirsztajn.webp" alt="Hedcut-style illustration of Regina Safirsztajn" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Regina Safirsztajn</b> 1915–1945</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/recha-sternbuch.webp" alt="Hedcut-style illustration of Recha Sternbuch" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Recha Sternbuch</b> 1905–1971</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/vladka-meed.webp" alt="Hedcut-style illustration of Vladka Meed" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Vladka Meed</b> 1921–2012</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/renia-kukielka.webp" alt="Hedcut-style illustration of Renia Kukielka" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Renia Kukielka</b> 1924–2014</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/viola-stern-fischerova.webp" alt="Hedcut-style illustration of Viola Stern Fischerová" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Viola Stern Fischerová</b> 1922–2017</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/ella-lingens-reiner.webp" alt="Hedcut-style illustration of Ella Lingens-Reiner" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Ella Lingens-Reiner</b> 1908–2002</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/hilde-meisel.webp" alt="Hedcut-style illustration of Hilde Meisel (Hilda Monte)" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Hilde Meisel (Hilda Monte)</b> 1914–1945</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/rosa-jochmann.webp" alt="Hedcut-style illustration of Rosa Jochmann" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Rosa Jochmann</b> 1901–1994</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/irene-harand.webp" alt="Hedcut-style illustration of Irene Harand" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Irene Harand</b> 1900–1975</figcaption></figure>
+      <figure class="name-chip w-card"><img src="/assets/img/women/roster/muriel-gardiner.webp" alt="Hedcut-style illustration of Muriel Gardiner" width="400" height="500" loading="lazy" decoding="async"><figcaption><b>Muriel Gardiner</b> 1901–1985</figcaption></figure>
     </div>
+
+    <details class="roster-credits"><summary>Roster portrait sources</summary><ul>
+      <li><b>Andrée Geulen-Herscovici</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Andr%C3%A9e_Geulen_on_Rue_Neuve_in_Brussels_in_May_1944.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Chajka Klinger</b>: drawn from <a href="https://en.wikipedia.org/wiki/File:Chajka_Klinger.jpg">this photograph</a>. Reuse permission has not been confirmed.</li>
+      <li><b>Ella Gärtner</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Ala_Gertner_(1912-1945).jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Ella Lingens-Reiner</b>: drawn from <a href="https://en.wikipedia.org/wiki/File:Ella_Lingens.jpeg">this photograph</a>. Reuse permission has not been confirmed.</li>
+      <li><b>Frumka Płotnicka</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Frumka-Plotnicka.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Gusta Davidson Draenger</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Gusta_Dawidson.gif">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Haika Grossman</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Haika_Grossman_D127-110_(cropped).jpg">this photograph</a>. Licence as stated by the source: CC BY-SA 3.0. Later-life photograph.</li>
+      <li><b>Hannah Szenes</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_7715_Hannah_Senesh.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Havivah Reik</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Havivareik.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Hilde Meisel (Hilda Monte)</b>: drawn from <a href="https://en.wikipedia.org/wiki/File:Hilde_Meisel_bw_small.tif">this photograph</a>. Reuse permission has not been confirmed.</li>
+      <li><b>Irena Sendler</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Irena_Sendlerowa_1942.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Irene Harand</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Irene_Harand_-_1969.jpg">this photograph</a>. Licence as stated by the source: Public domain. Photographed 1969.</li>
+      <li><b>Judith Grunfeld</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Judith_Rosenbaum_later_Grunfeld.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Lonka Korzybrodska</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Lonka_Korzybrodska.png">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Luba Bielicka Blum</b>: drawn from <a href="https://wwv.yadvashem.org/yv/en/exhibitions/otwock/staff_blum.asp">this photograph</a>. Reuse permission has not been confirmed.</li>
+      <li><b>Luba Tryszynska-Frederick</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Luba_Tryszynska_Bergen-Belsen_15_April_1945_cropped.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Masha Bruskina</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Masha_Bruskina.jpg">this photograph</a>. Licence as stated by the source: CC0.</li>
+      <li><b>Mira Fuchrer</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Mira_Fuchrer.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Muriel Gardiner</b>: drawn from <a href="https://botstiberbiaas.org/code-name-mary-muriel-gardiner/">this photograph</a>. Reuse permission has not been confirmed. Portrait 1934 by Trude Fleischmann (copyright likely held by her estate).</li>
+      <li><b>Noemi Szac-Wajnkranc</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Noemi_Szac-Wajnkranc.png">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Recha Sternbuch</b>: drawn from <a href="https://www.chabad.org/theJewishWoman/article_cdo/aid/7171162/jewish/Unsung-Holocaust-Hero-Recha-Sternbuch.htm">this photograph</a>. Reuse permission has not been confirmed. Chabad.org article; no photo credit given.</li>
+      <li><b>Regina Safirsztajn</b>: drawn from <a href="https://www.lwvmunciedelaware.org/content.aspx?page_id=5&amp;club_id=468470&amp;item_id=112265">this photograph</a>. Reuse permission has not been confirmed. The only surviving photograph is badly blurred, so this likeness is approximate.</li>
+      <li><b>Renia Kukielka</b>: drawn from <a href="https://jwa.org/media/renia-kukielka-budapest-1944">this photograph</a>. Reuse permission has not been confirmed. Budapest 1944; from the photo insert of The Light of Days (J. Batalion), via JWA.</li>
+      <li><b>Rosa Jochmann</b>: drawn from <a href="https://fraueninbewegung.onb.ac.at/node/1251">this photograph</a>. Reuse permission has not been confirmed.</li>
+      <li><b>Rozka Korczak-Marla</b>: drawn from <a href="https://he.wikipedia.org/wiki/%D7%A7%D7%95%D7%91%D7%A5:RUZKA_KORCHAK.jpg">this photograph</a>. Reuse permission has not been confirmed. Taken from a Hebrew book cover (fair use on Hebrew Wikipedia).</li>
+      <li><b>Sabina Zlatin</b>: drawn from <a href="https://en.wikipedia.org/wiki/File:Sabine_Zlatin_1987.jpg">this photograph</a>. Reuse permission has not been confirmed. Photographed 1987.</li>
+      <li><b>Sara Ginaite-Rubinson</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Sara_Ginaite.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Tosia Altman</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Tosia_Altman.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Viola Stern Fischerová</b>: drawn from <a href="https://www.centropa.org/en/biography/viola-rozalia-fischerova">this photograph</a>. Reuse permission has not been confirmed. Centropa interview archive, photo c. 1950 (born Stern, Lučenec 1922).</li>
+      <li><b>Vitka Kempner</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Vitka_Kempner.jpg">this photograph</a>. Licence as stated by the source: Public domain.</li>
+      <li><b>Vladka Meed</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Vladka_Meed_(2005).jpg">this photograph</a>. Licence as stated by the source: CC BY 2.0. Photographed 2005.</li>
+      <li><b>Zivia Lubetkin</b>: drawn from <a href="https://commons.wikimedia.org/wiki/File:Zivia_Lubetkin.jpg">this photograph</a>. Licence as stated by the source: CC BY 3.0.</li>
+      <li>All roster portraits are hedcut-style ink illustrations made with AI image tools from the linked photographs. Credits identify sources only and do not imply endorsement.</li>
+    </ul></details>
 
     </details>
 
