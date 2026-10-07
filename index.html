@@ -305,11 +305,12 @@
   .pcard { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 22px; height: 100%;
            box-shadow: 0 14px 34px rgba(28,26,23,.10); transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease; }
   .pcard-figure { margin: 0 0 16px; }
-  .pcard-figure img { display: block; width: 100%; max-width: 220px; height: auto; aspect-ratio: 257 / 399; object-fit: cover; margin: 0 auto;
+  .pcard-figure picture { display: block; }
+  .pcard-figure img { display: block; width: 100%; max-width: 220px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; margin: 0 auto;
                       border-radius: 6px; border: 1px solid var(--line-strong); box-shadow: 0 10px 22px rgba(28,26,23,.22); background: var(--paper-2); }
   .pcard-figure figcaption { font-size: 12.5px; line-height: 1.45; color: var(--ink-faint); margin-top: 10px; text-align: center; }
   .pcard-figure figcaption a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
-  .pcard-missing .pcard-monogram { width: 100%; max-width: 220px; aspect-ratio: 257 / 399; margin: 0 auto; border-radius: 6px; border: 1px dashed var(--line-strong);
+  .pcard-missing .pcard-monogram { width: 100%; max-width: 220px; aspect-ratio: 4 / 5; margin: 0 auto; border-radius: 6px; border: 1px dashed var(--line-strong);
                       display: grid; place-items: center; font: 500 44px/1 var(--font-serif); color: var(--ink-faint); letter-spacing: .06em;
                       background: repeating-linear-gradient(135deg, var(--paper) 0 10px, var(--paper-2) 10px 20px); }
   .pcard .story-place { margin-bottom: 6px; font-size: 13px; }
@@ -469,8 +470,8 @@
           <li>
             <article class="pcard" id="woman-roza-robota" aria-labelledby="woman-roza-robota-name">
               <figure class="pcard-figure">
-                <img src="/assets/img/women/roza-robota-charcoal.jpg" width="257" height="399" loading="lazy" decoding="async"
-                     alt="Róża Robota, head-and-shoulders portrait taken before 1939: a young woman with dark curly hair, smiling, in a patterned blouse.">
+                <picture><source srcset="/assets/img/women/roza-robota-charcoal.webp" type="image/webp"><img src="/assets/img/women/roza-robota-charcoal.jpg" width="257" height="321" loading="lazy" decoding="async"
+                     alt="Róża Robota, head-and-shoulders portrait taken before 1939: a young woman with dark curly hair, smiling, in a patterned blouse."></picture>
                 <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/roza-robota-original.jpg">Original photograph</a></figcaption>
               </figure>
               <div class="pcard-text">
@@ -486,8 +487,8 @@
           <li>
             <article class="pcard" id="woman-gisi-fleischmann" aria-labelledby="woman-gisi-fleischmann-name">
               <figure class="pcard-figure">
-                <img src="/assets/img/women/gisi-fleischmann-charcoal.jpg" width="300" height="469" loading="lazy" decoding="async"
-                     alt="Gisi Fleischmann, studio portrait: a woman with dark, shoulder-length hair, wearing a dark top and a double strand of pearls.">
+                <picture><source srcset="/assets/img/women/gisi-fleischmann-charcoal.webp" type="image/webp"><img src="/assets/img/women/gisi-fleischmann-charcoal.jpg" width="300" height="375" loading="lazy" decoding="async"
+                     alt="Gisi Fleischmann, studio portrait: a woman with dark, shoulder-length hair, wearing a dark top and a double strand of pearls."></picture>
                 <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/gisi-fleischmann-original.jpg">Original photograph</a></figcaption>
               </figure>
               <div class="pcard-text">
@@ -501,9 +502,10 @@
           </li>
           <li>
             <article class="pcard" id="woman-rachel-auerbach" aria-labelledby="woman-rachel-auerbach-name">
-              <figure class="pcard-figure pcard-missing" aria-label="Portrait not shown">
-                <div class="pcard-monogram" aria-hidden="true">RA</div>
-                <figcaption>Archival portrait not shown: reuse rights for a photograph have not yet been confirmed.</figcaption>
+              <figure class="pcard-figure">
+                <picture><source srcset="/assets/img/women/rachel-auerbach-charcoal.webp" type="image/webp"><img src="/assets/img/women/rachel-auerbach-charcoal.jpg" width="478" height="598" loading="lazy" decoding="async"
+                     alt="Rachel Auerbach, head-and-shoulders portrait: a woman with her hair swept up, looking directly at the camera."></picture>
+                <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/rachel-auerbach-original.jpg">Original photograph</a></figcaption>
               </figure>
               <div class="pcard-text">
                 <p class="story-place">Warsaw Ghetto</p>
@@ -516,9 +518,10 @@
           </li>
           <li>
             <article class="pcard" id="woman-faye-schulman" aria-labelledby="woman-faye-schulman-name">
-              <figure class="pcard-figure pcard-missing" aria-label="Portrait not shown">
-                <div class="pcard-monogram" aria-hidden="true">FS</div>
-                <figcaption>Archival portrait not shown: reuse rights for a photograph have not yet been confirmed.</figcaption>
+              <figure class="pcard-figure">
+                <picture><source srcset="/assets/img/women/faye-schulman-charcoal.webp" type="image/webp"><img src="/assets/img/women/faye-schulman-charcoal.jpg" width="168" height="210" loading="lazy" decoding="async"
+                     alt="Faye Schulman as a young woman: close portrait with dark hair parted at the side, smiling slightly, in a dark jacket and patterned collar."></picture>
+                <figcaption>Charcoal-style treatment of an archival photograph. <a href="/assets/img/women/faye-schulman-original.jpg">Original photograph</a></figcaption>
               </figure>
               <div class="pcard-text">
                 <p class="story-place">Partisan resistance</p>
@@ -536,7 +539,9 @@
         <ul>
           <li><b>Róża Robota</b>: photograph taken before 1939, photographer unknown. Via <a href="https://commons.wikimedia.org/wiki/File:Roza_Robota_(1921-1945).jpg">Wikimedia Commons</a>, where it is listed as public domain under Polish copyright law for photographs published before 1994 without a copyright notice. Details of its first publication are not confirmed. Tone treatment by The Legacy Project.</li>
           <li><b>Gisi Fleischmann</b>: Fleischmann family archive, from the archive of Viera Kamenická, via <a href="https://commons.wikimedia.org/wiki/File:Gisi_Fleischmann.jpg">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Adapted (charcoal-style tone treatment) by The Legacy Project; the adaptation is shared under the same licence.</li>
-          <li>The charcoal-style images are tone treatments of the archival photographs. No features have been added, altered or generated.</li>
+          <li><b>Rachel Auerbach</b>: Source: <a href="https://www.yadvashem.org/sites/default/files/styles/main_image/public/Rachel%20Auerbach_1.jpg">Yad Vashem</a>. Photographer and archival item not yet identified. Reuse permission has not been confirmed. Cropped and tone-treated by The Legacy Project.</li>
+          <li><b>Faye Schulman</b>: Source: <a href="https://www.jewishpartisans.org/partisans/faye-schulman">Jewish Partisan Educational Foundation (JPEF)</a>. Photographer and date not stated by the source. Reuse permission has not been confirmed. Cropped and tone-treated by The Legacy Project.</li>
+          <li>The charcoal-style images are tone treatments of the archival photographs, cropped to a common portrait frame. No features have been added, altered or generated. Credits identify sources only and do not imply endorsement.</li>
         </ul>
       </details>
       <p class="reference-note">These references provide historical background; linking to an institution does not imply its endorsement of the book or project.</p>

@@ -28,7 +28,7 @@ Cloudflare Pages accepts files up to 25 MiB each. Keep video files under 22 MiB.
 
 ## Portraits
 
-`assets/img/women/` contains the archival photographs (`*-original.jpg`) and their charcoal-style tone treatments (`*-charcoal.jpg`). Sources and licences are credited on the homepage. Rachel Auerbach and Faye Schulman have no portrait yet because reuse rights have not been confirmed.
+`assets/img/women/` contains the archival photographs (`*-original.jpg`) and their charcoal-style tone treatments (`*-charcoal.jpg`). Sources are credited on the homepage. Gisi Fleischmann (CC BY-SA 4.0) and Róża Robota (public-domain rationale on Wikimedia Commons, first publication unconfirmed) have documented reuse status. The Rachel Auerbach (Yad Vashem) and Faye Schulman (JPEF) photographs were selected by Grant de Graf; reuse permission for them has not been confirmed.
 
 ## Reader
 
