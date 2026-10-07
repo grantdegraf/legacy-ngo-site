@@ -1,33 +1,23 @@
 # Women Without Fear — The Legacy Project
 
-Static website for The Legacy Project, featuring *Women Without Fear* — a book and 30-episode cinematic series about Jewish women who resisted the Nazi regime.
+Static website for The Legacy Project and Women Without Fear: 36 women who resisted the Nazi regime, including Jewish resistance figures and non-Jewish rescuers.
 
-## Hosting
+The manuscript is complete and preparing for publication. A documentary series and educational adaptations are in development; no fixed episode count or curriculum adoption is asserted.
 
-Deployed on GitHub Pages: https://grantdegraf.github.io/legacy-ngo-site
+## Live site and deployment
 
-Custom domain (pending): legacy.ngo
+Live website: https://legacy.ngo/
 
-## Structure
+Production is the existing Cloudflare Pages project `legacy-ngo`. Pushing GitHub branch `main` automatically publishes the full repository to its configured domains. This is plain HTML/CSS/JS with no build step or deployment command.
 
-```
-/
-├── index.html
-├── styles.css
-└── README.md
-```
+Work on a branch from current `main`, push it, and verify its actual Cloudflare branch preview URL and commit. After verification, fast-forward `main` to the reviewed branch and push `origin main`. Capture the current production deployment and commit before publishing. If rollback is needed, roll back in Cloudflare and correct Git so the next push does not reintroduce the change.
 
-## Technologies
+Do not use direct upload, a replacement hosting project or DNS changes. Historical GitHub Pages settings are not the active production host. Preserve the complete repository, including `sample/med`, `sample/pages`, `assets`, donation files, partnership forms and routing configuration.
 
-- HTML5
-- CSS3
-- Google Fonts (Playfair Display, Source Sans Pro)
-- No frameworks, no build tools, no JavaScript dependencies
+## Reader
+
+`/sample/` opens Chapter 23 on sample page 14. `#p1` through `#p24` deep links remain supported. Section shortcuts lead to contents (3), the author's note (5), chapter (14), map (22), further reading (23), and cover (1).
 
 ## Contact
 
-grant@legacy.ngo
-
-## Migration
-
-Compatible with Cloudflare Pages — no GitHub-specific features used.
+info@legacy.ngo

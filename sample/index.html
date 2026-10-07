@@ -56,6 +56,13 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hint{color:var(--ink-faint);font-size:12.5px}
 @media (max-width:760px){.hint,.desk,.ttl,.brand small{display:none}footer{justify-content:center;gap:6px}header{padding:4px 12px}.notice{padding:3px 12px;font-size:11.5px}.cta{width:100%;font-size:13px;min-height:40px;padding:6px 10px;text-align:center}.grp:last-child{width:100%}.back span{display:none}}
+ .reader-sections { display:flex; gap:8px 18px; flex-wrap:wrap; justify-content:center; padding:8px 16px; border-bottom:1px solid var(--line); flex-shrink:0; }
+.reader-sections a { font-size:14px; min-height:44px; display:inline-flex; align-items:center; text-decoration:underline; text-underline-offset:3px; }
+.reader-sections a[aria-current] { color:var(--accent); font-weight:600; }
+.reader-next { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px 20px; padding:8px 16px; background:var(--accent-soft); font-size:14px; }
+.reader-next[hidden] { display:none; }
+.reader-next a { display:inline-flex; align-items:center; min-height:44px; color:var(--accent); text-decoration:underline; }
+@media (max-width:760px) { .reader-sections { gap:0 16px; padding:3px 12px; } .reader-sections a { font-size:14px; min-height:40px; } .notice { font-size:12px; } }
 @media (prefers-reduced-motion:no-preference){#sheet.anim{transition:transform .18s ease}}
 </style>
 </head>
@@ -67,6 +74,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
   <div class="sub">Chapter 23: Róża Robota &middot; A selection from the complete book of 36 chapters</div></div>
   <a class="back" href="/#project">&larr;&nbsp;<span>Back to the project</span></a>
 </header>
+<nav class="reader-sections" aria-label="Sample sections"><a href="#p14">Start the chapter</a><a href="#p3">Contents</a><a href="#p5">Author’s note</a><a href="#p22">Map</a><a href="#p23">Further reading</a><a href="#p1">Cover</a></nav>
 <div class="notice">Sample selection from the complete book. Chapter 23: Róża Robota. &copy; 2026 Grant de Graf. All rights reserved.</div>
 <main>
   <div id="stage" tabindex="0" role="group" aria-roledescription="page viewer" aria-label="Sample page viewer. Use left and right arrow keys to change page, plus and minus to zoom.">
@@ -76,6 +84,7 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
   <div class="nav prev"><button id="prev" aria-label="Previous page">&#8249;</button></div>
   <div class="nav next"><button id="next" aria-label="Next page">&#8250;</button></div>
 </main>
+<div id="reader-next" class="reader-next" hidden><span>Continue exploring <em>Women Without Fear</em>.</span><a href="/#women">Meet more women</a><a href="/#notify">Receive publication news</a></div>
 <footer>
   <div class="grp">
     <button id="zout" aria-label="Zoom out">&minus;</button>
@@ -111,7 +120,7 @@ ALT[14]='Chapter 23 opening page: Róża Robota, The Seam, 1921 to 1945.';
 for(i=15;i<=20;i++)ALT[i]='Chapter 23: Róża Robota, text page '+(i-13)+' of 10.';
 ALT[21]='Chapter 23: Róża Robota, final text page followed by Historical Context and Geography.';
 ALT[23]='Chapter 23: Róża Robota, milestones, key figures and forces, and further reading.';
-var cur=1, scale=1, tx=0, ty=0, fit=1, stage=document.getElementById('stage'), sheet=document.getElementById('sheet'),
+var cur=14, scale=1, tx=0, ty=0, fit=1, stage=document.getElementById('stage'), sheet=document.getElementById('sheet'),
     img=document.getElementById('pageimg'), count=document.getElementById('count'), spin=document.getElementById('spin'),
     hiLoaded={}, medCache={};
 function med(n){return 'med/page-'+pad(n)+'.webp'}
@@ -147,9 +156,12 @@ function show(n,fromHash){
   n=Math.max(1,Math.min(N,n)); cur=n; scale=1; tx=ty=0;
   spin.textContent='Loading page…';
   img.onload=function(){spin.textContent=''};
+  img.onerror=function(){spin.textContent='Page could not load. Try another page or reload the reader.'};
   img.src=hiLoaded[n]?hi(n):med(n);
   img.alt='Page '+n+' of '+N+'. '+(ALT[n]||'');
   count.textContent='Page '+n+' of '+N;
+  document.getElementById('reader-next').hidden=n<21;
+  document.querySelectorAll('.reader-sections a').forEach(function(a){var active=a.hash==='#p'+n; if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   document.getElementById('prev').disabled=n===1; document.getElementById('next').disabled=n===N;
   document.getElementById('jump').value='';
   layout();
@@ -170,7 +182,7 @@ document.getElementById('zout').onclick=function(){zoomTo(scale/1.5,null,null,tr
 document.getElementById('zreset').onclick=function(){scale=1;tx=ty=0;apply(true)};
 document.getElementById('jump').addEventListener('keydown',function(e){if(e.key==='Enter'){var v=parseInt(this.value,10); if(v)show(v)} e.stopPropagation()});
 document.addEventListener('keydown',function(e){
-  if(e.target&&e.target.tagName==='INPUT')return;
+  if(e.target&&/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(e.target.tagName))return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;
   var k=e.key, step=60;
   if(k==='ArrowRight'||k==='PageDown'){ if(scale>1.01&&k==='ArrowRight'&&Math.abs(tx)<(fit*scale-stage.clientWidth)/2+7){tx-=step;clamp();apply(true)} else show(cur+1); e.preventDefault()}
@@ -211,7 +223,7 @@ stage.addEventListener('pointerup',end); stage.addEventListener('pointercancel',
 stage.addEventListener('wheel',function(e){ if(e.ctrlKey||e.metaKey){e.preventDefault(); zoomTo(scale*(e.deltaY<0?1.12:1/1.12),e.clientX,e.clientY,false)} else if(scale>1.01){e.preventDefault(); tx-=e.deltaX; ty-=e.deltaY; clamp(); apply(false)} },{passive:false});
 window.addEventListener('resize',layout);
 window.addEventListener('hashchange',function(){var m=/^#p(\d+)$/.exec(location.hash); if(m)show(+m[1],true)});
-var m=/^#p(\d+)$/.exec(location.hash); show(m?+m[1]:1,true);
+var m=/^#p(\d+)$/.exec(location.hash); show(m?+m[1]:14,true);
 })();
 </script>
 </body>
