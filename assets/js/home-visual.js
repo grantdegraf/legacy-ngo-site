@@ -1,4 +1,4 @@
-/* The Legacy Project - homepage teaser video and portrait motion.
+/* The Legacy Project - homepage teaser video.
    Plain JavaScript, no dependencies. Everything here is an enhancement:
    without JavaScript the teaser has native controls and the portraits
    are a static, fully readable layout. */
@@ -104,32 +104,4 @@
     label();
   }
 
-  /* ---------- Portrait cards: restrained floating motion, pausable ---------- */
-  var stage = document.querySelector('.portrait-stage');
-  var motionBtn = document.getElementById('portrait-motion-toggle');
-  if (stage && motionBtn && !reduceMotion) {
-    var userStopped = false;
-    function setMotion(on) {
-      stage.classList.toggle('is-floating', on);
-    }
-    function syncBtn() {
-      motionBtn.textContent = userStopped ? 'Resume animation' : 'Pause animation';
-      motionBtn.setAttribute('aria-pressed', userStopped ? 'true' : 'false');
-    }
-    stage.classList.add('motion-ready');
-    motionBtn.hidden = false;
-    motionBtn.addEventListener('click', function () {
-      userStopped = !userStopped;
-      setMotion(!userStopped);
-      syncBtn();
-    });
-    syncBtn();
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { setMotion(e.isIntersecting && !userStopped); });
-      }).observe(stage);
-    } else {
-      setMotion(true);
-    }
-  }
 })();

@@ -30,6 +30,10 @@ Cloudflare Pages accepts files up to 25 MiB each. Keep video files under 22 MiB.
 
 `assets/img/women/` contains the archival photographs (`*-original.jpg`) and their charcoal-style tone treatments (`*-charcoal.jpg`). Sources are credited on the homepage. Gisi Fleischmann (CC BY-SA 4.0) and Róża Robota (public-domain rationale on Wikimedia Commons, first publication unconfirmed) have documented reuse status. The Rachel Auerbach (Yad Vashem) and Faye Schulman (JPEF) photographs were selected by Grant de Graf; reuse permission for them has not been confirmed.
 
+## Motion
+
+`assets/js/scroll3d.js` adds scroll-linked 3D to the homepage: the book cover, fact cards, headings, story paragraphs, trailer screen, portrait cards, a desktop sticky portrait stage (native CSS sticky) and the name grid above the roster. The page always scrolls natively; every element settles flat in the middle of the viewport. It is off with reduced motion, and the "Pause motion" button stops it. Without JavaScript the page shows the static layout.
+
 ## Reader
 
 `/sample/` opens Chapter 23 on sample page 14. `#p1` through `#p24` deep links remain supported. Section shortcuts lead to contents (3), the author's note (5), chapter (14), map (22), further reading (23), and cover (1).

@@ -323,21 +323,7 @@
   .portrait-credits ul { margin: 6px 0 0 18px; display: grid; gap: 8px; max-width: 80ch; }
   .portrait-credits a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-  /* Depth: only when JavaScript has enabled motion and the visitor allows it */
-  @media (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
-    .motion-ready .portrait-cards > li:nth-child(1) .pcard { transform: rotateY(3deg) rotateZ(-1deg); }
-    .motion-ready .portrait-cards > li:nth-child(2) .pcard { transform: rotateY(1.5deg) rotateZ(0.8deg) translateY(16px); }
-    .motion-ready .portrait-cards > li:nth-child(3) .pcard { transform: rotateY(-1.5deg) rotateZ(-0.7deg) translateY(6px); }
-    .motion-ready .portrait-cards > li:nth-child(4) .pcard { transform: rotateY(-3deg) rotateZ(1deg) translateY(20px); }
-    .motion-ready .pcard:hover, .motion-ready .pcard:focus-within { transform: none; box-shadow: 0 22px 48px rgba(28,26,23,.18); }
-    .is-floating .pcard-figure img, .is-floating .pcard-monogram { animation: pcard-float 7s ease-in-out infinite; }
-    .is-floating .portrait-cards > li:nth-child(2) .pcard-figure > * { animation-delay: -1.8s; }
-    .is-floating .portrait-cards > li:nth-child(3) .pcard-figure > * { animation-delay: -3.5s; }
-    .is-floating .portrait-cards > li:nth-child(4) .pcard-figure > * { animation-delay: -5.2s; }
-    .is-floating .pcard:hover .pcard-figure > *, .is-floating .pcard:focus-within .pcard-figure > * { animation-play-state: paused; }
-  }
-  @keyframes pcard-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-7px) rotate(.4deg); } }
-  @media (max-width: 999px) { .portrait-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .portrait-controls { display: none; } }
+  @media (max-width: 999px) { .portrait-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 620px) {
     .portrait-cards { grid-template-columns: 1fr; gap: 16px; }
     .pcard { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 16px; align-items: start; padding: 16px; }
@@ -351,6 +337,70 @@
     .pcard h4 { font-size: 21px; }
   }
   @media (prefers-reduced-motion: reduce) { .pcard, .pcard-figure img { transition: none; animation: none !important; transform: none !important; } }
+
+  /* ---- Scroll-linked 3D (Oct 2026): "the archive comes forward" ---- */
+  .s3d .hero-grid { perspective: 1400px; }
+  .s3d .facts { perspective: 900px; }
+  .s3d .fact { transform-origin: 50% 100%; will-change: transform, opacity; }
+  .s3d section:not(.hero) h2, .s3d .women-intro > h3 { transform-origin: 50% 100%; will-change: transform, opacity, filter; }
+  .s3d section:not(.hero) .wrap { perspective: 1200px; }
+  .cover3d { position: relative; display: block; transform-style: preserve-3d; will-change: transform; border-radius: 10px; }
+  .cover3d .hero-cover { transform: none; box-shadow: 0 calc(14px + 26px * var(--depth, 1)) calc(30px + 50px * var(--depth, 1)) rgba(28,26,23,.28); display: block; }
+  .cover3d-sheen { position: absolute; inset: 0; border-radius: 10px; pointer-events: none; mix-blend-mode: soft-light; opacity: 0; transition: opacity .3s;
+                   background: radial-gradient(circle at var(--sx, 30%) var(--sy, 20%), rgba(255,255,255,.55), rgba(255,255,255,0) 55%); }
+  .cover3d:hover .cover3d-sheen { opacity: 1; }
+  .s3d .teaser { perspective: 1400px; }
+  .s3d .teaser .frame16 { transform-origin: 50% 100%; will-change: transform; }
+  .s3d .portrait-cards { perspective: 1600px; }
+  .s3d .pcard { will-change: transform, opacity; transform-style: preserve-3d; }
+  .s3d .pcard-figure picture { overflow: hidden; border-radius: 6px; max-width: 220px; margin: 0 auto; }
+  .s3d .pcard-figure img { will-change: transform; }
+  .pcard-story { will-change: opacity, filter; }
+
+  /* Deckled archival edge + paper grain (decorative) */
+  /* Deckled archival edge: decorative overlay; if it fails to load, the photo simply has a straight edge */
+  .s3d .pcard-figure picture { position: relative; display: block; }
+  .s3d .pcard-figure picture::after, .pstage-frame::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 40;
+       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 125' preserveAspectRatio='none'%3E%3Cfilter id='d' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='7'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.6'/%3E%3C/filter%3E%3Cmask id='m'%3E%3Crect width='100' height='125' fill='%23fff'/%3E%3Crect x='2.2' y='2.2' width='95.6' height='120.6' fill='%23000' filter='url(%23d)'/%3E%3C/mask%3E%3Crect width='100' height='125' fill='%23fff' mask='url(%23m)'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+  .portrait-stage { border-radius: 14px; padding: 18px;
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .30 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+  .pcard-figure img { border: 0; }
+
+  /* A. Desktop sticky portrait stage (built by JavaScript, decorative) */
+  .pstage { display: none; }
+  .stage-mode { display: grid; grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.15fr); column-gap: 56px; align-items: start; }
+  .stage-mode .portrait-controls { grid-column: 1 / -1; }
+  .stage-mode .pstage { display: block; position: sticky; top: calc(50vh - 250px); perspective: 1400px; padding: 10px 0 30px; }
+  .stage-mode .pstage-card { width: min(100%, 340px); margin: 0 auto; background: #fff; padding: 14px; border-radius: 6px; transform-style: preserve-3d; will-change: transform, opacity;
+       box-shadow: calc(-30px * var(--shade, 0)) 30px 60px rgba(28,26,23,.22), 0 4px 10px rgba(28,26,23,.12); }
+  .stage-mode .pstage-frame { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper-2); }
+  .pstage-layer { position: absolute; inset: 0; will-change: transform, opacity;
+       -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 calc(var(--r, 160%) - 18%), transparent var(--r, 160%));
+               mask-image: radial-gradient(circle at 50% 42%, #000 calc(var(--r, 160%) - 18%), transparent var(--r, 160%)); }
+  .pstage-layer picture, .pstage-layer img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .pstage-name { text-align: center; font: 500 22px/1.3 var(--font-serif); color: var(--ink); margin-top: 18px; min-height: 1.3em; }
+  .stage-mode .portrait-cards { grid-template-columns: 1fr; gap: 0; perspective: none; }
+  .stage-mode .portrait-cards > li { min-height: 78vh; display: flex; align-items: center; }
+  .stage-mode .pcard { display: flex; flex-direction: column; box-shadow: none; background: transparent; border: 0; padding: 0; transform: none !important; opacity: 1 !important; }
+  .stage-mode .pcard-figure { margin: 0 0 12px; }
+  .stage-mode .pcard-figure picture { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; }
+  .stage-mode .pcard-figure figcaption { text-align: left; margin-top: 0; }
+  .stage-mode .pcard h4 { font-size: 34px; }
+  .stage-mode .pcard-story { font-size: 18px; max-width: 46ch; }
+
+  /* E. Name emergence above the roster (decorative) */
+  .name-grid { display: grid; grid-template-columns: repeat(22, minmax(0, 1fr)); max-width: 760px; margin: 40px auto 10px; perspective: 600px;
+               font: 500 clamp(12px, 2.6vw, 26px)/1.5 var(--font-serif); text-align: center; color: var(--ink); user-select: none; }
+  .name-grid span { display: block; will-change: transform, opacity; }
+  .name-grid .ng-fill { color: var(--ink-faint); }
+  .name-grid.ng-done .ng-name { color: var(--accent); transition: color .6s; }
+
+  .s3d-paused .pcard, .s3d-paused .fact, .s3d-paused h2, .s3d-paused h3 { transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .cover3d, .pcard, .fact, h2, h3, .teaser .frame16, .pstage-card { transform: none !important; opacity: 1 !important; filter: none !important; }
+    .name-grid { display: none; }
+  }
 
 </style>
 
@@ -465,7 +515,7 @@
       <p class="eyebrow">Meet the women</p>
       <h3>Four lives. Different forms of resistance.</h3>
       <div class="portrait-stage">
-        <div class="portrait-controls"><button type="button" id="portrait-motion-toggle" class="motion-toggle" aria-pressed="false" hidden>Pause animation</button></div>
+        <div class="portrait-controls"><button type="button" id="portrait-motion-toggle" class="motion-toggle" aria-pressed="false" hidden>Pause motion</button></div>
         <ul class="portrait-cards" role="list">
           <li>
             <article class="pcard" id="woman-roza-robota" aria-labelledby="woman-roza-robota-name">
@@ -897,6 +947,7 @@
   if(menu) menu.addEventListener('click',function(event){if(event.target.closest('a')) menu.open=false;});
 })();
 </script>
-<script src="/assets/js/home-visual.js?v=20261007" defer></script>
+<script src="/assets/js/home-visual.js?v=20261007b" defer></script>
+<script src="/assets/js/scroll3d.js?v=20261007" defer></script>
 </body>
 </html>
