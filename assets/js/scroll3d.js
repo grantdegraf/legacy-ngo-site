@@ -96,7 +96,7 @@
   }
 
   // E. Name emergence above the roster
-  var roster = document.getElementById('all-women');
+  var roster = document.getElementById('name-tornado') ? null : document.getElementById('all-women');
   var grid = null, gridCells = [];
   if (roster) {
     var names = ['RÓŻA ROBOTA', 'GISI FLEISCHMANN', 'RACHEL AUERBACH', 'FAYE SCHULMAN', 'ZIVIA LUBETKIN', 'IRENA SENDLER'];

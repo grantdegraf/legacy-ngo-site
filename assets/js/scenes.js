@@ -1,8 +1,12 @@
 /* The Legacy Project - homepage scenes.
    1. Book: turns to the back cover and returns to the front when the page opens.
    2. Laptop: the lid opens as it scrolls into view; a film excerpt plays in black and white.
-   3. Founder: full-length 360 degree turnaround that ends facing front.
+   3. Founder: full-length 360 degree turn, a pause, then again, while in view.
    4. Family: ten-second time-lapse, one portrait in 1946 to about eighty people in 2026.
+   5. "Read a Sample Chapter" comes forward over the paragraph as it passes, then settles.
+   6. The 36 names swirl like a tornado and settle into place.
+   7. Envelopes spin away below "Notify me at launch": EMAIL DISPATCHED.
+   8. "Why now": a window closes as it scrolls in; the text stays visible through the glass.
    Plain JavaScript, no dependencies. Without JavaScript every scene shows a still
    image. With reduced motion nothing moves until the visitor presses a button. */
 (function () {
@@ -160,26 +164,39 @@
   Sequence.prototype.at = function (ms, fn) { this.timers.push(setTimeout(fn, ms)); };
   Sequence.prototype.end = function () { this.host.classList.remove('seq-running'); this.cur = null; this.layers.forEach(function (l) { l.style.transitionDuration = '0ms'; l.classList.remove('on'); }); };
 
-  /* ---------- 3. Founder turnaround ---------- */
+  /* ---------- 3. Founder turnaround: turn 360, pause, turn again while in view ---------- */
   var fs = document.getElementById('founder-turn');
   if (fs) {
     var fUrls = frameUrls(fs);
     if (fUrls.length) {
-      var fseq = new Sequence(fs, fUrls), fBtn = fs.querySelector('.seq-replay'), fDone = false;
-      var turn = function () {
+      var fseq = new Sequence(fs, fUrls), fBtn = fs.querySelector('.seq-replay');
+      var fIn = false, fOn = !reduce, fTimer = 0, fBusy = false;
+      var fLabel = function () { if (fBtn) fBtn.textContent = fOn ? 'Pause the turn' : 'Turn around'; };
+      var turnOnce = function (done) {
         fseq.load(function () {
-          fseq.stop();
-          var step = 230, hold = 500, n = fUrls.length;
+          fseq.stop(); fBusy = true;
+          var step = 210, n = fUrls.length;
           fseq.show(0, 0);
-          for (var k = 1; k <= n; k++) (function (k) {
-            fseq.at(hold + k * step, function () { fseq.show(k % n, 160); });
-          })(k);
-          fseq.at(hold + n * step + 400, function () { fseq.end(); });
+          for (var k = 1; k <= n; k++) (function (k) { fseq.at(k * step, function () { fseq.show(k % n, 150); }); })(k);
+          fseq.at(n * step + 300, function () { fseq.end(); fBusy = false; done && done(); });
         });
       };
-      if (fBtn) { fBtn.hidden = false; fBtn.addEventListener('click', turn); }
+      var loop = function () {
+        clearTimeout(fTimer);
+        if (!fOn || !fIn || document.hidden) return;
+        turnOnce(function () { fTimer = setTimeout(loop, 2600); });
+      };
+      if (fBtn) {
+        fBtn.hidden = false; fLabel();
+        fBtn.addEventListener('click', function () {
+          if (reduce) { if (!fBusy) turnOnce(); return; }
+          fOn = !fOn; fLabel();
+          if (fOn) loop(); else clearTimeout(fTimer);
+        });
+      }
       watch(fs, 0, function (v) { if (v) fseq.load(); }, '600px 0px');
-      if (!reduce) watch(fs, 0.6, function (v) { if (v && !fDone && !document.hidden) { fDone = true; turn(); } });
+      watch(fs, 0.5, function (v) { var was = fIn; fIn = v; if (v && !was && !fBusy) fTimer = setTimeout(loop, 500); if (!v) clearTimeout(fTimer); });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden && fIn && !fBusy) loop(); });
     }
   }
 
@@ -218,5 +235,141 @@
       watch(fam, 0, function (v) { if (v) seq.load(); }, '700px 0px');
       if (!reduce) watch(fam, 0.55, function (v) { if (v && !famDone && !document.hidden) { famDone = true; play(); } });
     }
+  }
+
+  /* ---------- Shared scroll loop for the scroll-linked scenes below ---------- */
+  var scrollers = [], sTick = false;
+  var runScrollers = function () { sTick = false; var vh = window.innerHeight; for (var i = 0; i < scrollers.length; i++) scrollers[i](vh); };
+  var addScroller = function (fn) {
+    scrollers.push(fn);
+    if (scrollers.length === 1) {
+      window.addEventListener('scroll', function () { if (!sTick) { sTick = true; requestAnimationFrame(runScrollers); } }, { passive: true });
+      window.addEventListener('resize', function () { requestAnimationFrame(runScrollers); });
+      window.addEventListener('load', function () { requestAnimationFrame(runScrollers); });
+    }
+    requestAnimationFrame(runScrollers);
+  };
+  var c01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var sm = function (t) { return t * t * (3 - 2 * t); };
+  var layoutTop = function (el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; };
+
+  /* ---------- 5. "Read a Sample Chapter" comes forward over the paragraph, then settles ---------- */
+  var pop = document.querySelector('#project .sample-cta .btn-primary');
+  if (pop && !reduce) {
+    pop.classList.add('pop-cta');
+    addScroller(function (vh) {
+      var c = layoutTop(pop) + pop.offsetHeight / 2 - window.pageYOffset;
+      var t = c01((vh * 0.95 - c) / (vh * 0.7));
+      var b = Math.sin(Math.PI * t); b = sm(c01(b * 1.25));
+      var narrow = window.innerWidth < 760, mag = narrow ? 0.42 : 0.95, lift = narrow ? 18 : 52;
+      pop.style.transform = b > 0.001 ? 'translate3d(0,' + (-lift * b).toFixed(1) + 'px,0) scale(' + (1 + mag * b).toFixed(3) + ')' : '';
+      pop.style.setProperty('--pop', b.toFixed(3));
+      pop.classList.toggle('pop-up', b > 0.02);
+      pop.classList.toggle('pop-peak', b > 0.8);
+    });
+  }
+
+  /* ---------- 6. The women's names swirl like a tornado, then settle into place ---------- */
+  var tor = document.getElementById('name-tornado');
+  if (tor) {
+    var names = Array.prototype.map.call(document.querySelectorAll('#all-women .name-chip b'), function (b) { return b.textContent.trim(); });
+    var letters = [];
+    names.forEach(function (n) {
+      var w = document.createElement('span'); w.className = 'nt-name';
+      n.split('').forEach(function (ch) {
+        var l = document.createElement('span'); l.className = ch === ' ' ? 'nt-l nt-sp' : 'nt-l'; l.textContent = ch === ' ' ? ' ' : ch;
+        w.appendChild(l); if (ch !== ' ') letters.push(l);
+      });
+      tor.appendChild(w);
+    });
+    var torBtn = document.getElementById('name-tornado-replay');
+    var seedT = 7, rndT = function () { seedT = (seedT * 9301 + 49297) % 233280; return seedT / 233280; };
+    var torRaf = 0, torDone = false;
+    var spin = function () {
+      cancelAnimationFrame(torRaf);
+      var W = tor.clientWidth, H = Math.max(tor.clientHeight, 220), cx = W / 2;
+      letters.forEach(function (l) { l.style.transform = ''; });
+      var tr = tor.getBoundingClientRect();
+      var data = letters.map(function (l) {
+        var lr = l.getBoundingClientRect(), hy = rndT();
+        return { l: l, fx: lr.left - tr.left + lr.width / 2, fy: lr.top - tr.top + lr.height / 2, hy: hy,
+                 a0: rndT() * Math.PI * 2, w: 3.2 + rndT() * 2.2, r: (W * 0.015 + Math.min(W * 0.3, 300) * Math.pow(1 - hy, 1.5)) * (0.8 + rndT() * 0.4),
+                 d: rndT() * 0.35 };
+      });
+      tor.classList.add('nt-run'); tor.classList.remove('nt-wait');
+      var T1 = 2600, T2 = 1900, t0 = performance.now();
+      var frame = function (now) {
+        var t = now - t0, done = t >= T1 + T2;
+        for (var i = 0; i < data.length; i++) {
+          var o = data[i];
+          var u = c01((t - T1 - o.d * T2 * 0.6) / (T2 * 0.75)); u = u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+          if (done) u = 1;
+          var ts = t / 1000, a = o.a0 + o.w * ts * (1 - 0.5 * u);
+          var wob = Math.sin(ts * 1.7 + o.hy * 2.4) * Math.min(W * 0.03, 30) * (0.4 + o.hy) + (o.hy - 0.5) * Math.min(W * 0.08, 70);
+          var tx = cx + wob + o.r * Math.cos(a) - o.fx, ty = H * (0.02 + o.hy * 0.96) - o.fy - Math.sin(ts * 1.3 + o.a0) * 6, tz = o.r * Math.sin(a) * 0.45;
+          var k = 1 - u, vis = (Math.sin(a) + 1) / 2;
+          var appear = c01(t / 500 - o.hy * 0.6);
+          o.l.style.transform = u >= 1 ? '' : 'translate3d(' + (tx * k).toFixed(1) + 'px,' + (ty * k).toFixed(1) + 'px,' + (tz * k).toFixed(1) + 'px) rotateY(' + (Math.cos(a) * 55 * k).toFixed(1) + 'deg) rotateZ(' + (Math.sin(a * 2 + o.a0) * 25 * k).toFixed(1) + 'deg)';
+          o.l.style.opacity = u >= 1 ? '' : (appear * (0.3 + 0.7 * vis + (0.7 - 0.7 * vis) * u)).toFixed(3);
+        }
+        if (!done) torRaf = requestAnimationFrame(frame); else { tor.classList.remove('nt-run'); tor.classList.add('nt-settled'); }
+      };
+      torRaf = requestAnimationFrame(frame);
+    };
+    if (!reduce) {
+      tor.classList.add('nt-wait');
+      watch(tor, 0.35, function (v) { if (v && !torDone && !document.hidden) { torDone = true; spin(); } });
+      if (!hasIO) tor.classList.remove('nt-wait');
+    }
+    if (torBtn) { torBtn.hidden = false; torBtn.addEventListener('click', function () { torDone = true; spin(); }); }
+  }
+
+  /* ---------- 7. "Email dispatched": envelopes spin away below the notify button ---------- */
+  var disp = document.getElementById('email-dispatch');
+  if (disp) {
+    var envs = Array.prototype.slice.call(disp.querySelectorAll('.env')), stamp = disp.querySelector('.dispatch-stamp'), trails = disp.querySelectorAll('.dispatch-trails path');
+    var paths = [ [-0.46, -0.20, 260], [0.44, -0.30, -200], [-0.22, -0.58, 120], [0.24, -0.62, -320], [-0.52, 0.18, 300], [0.52, 0.12, -240], [-0.05, -0.75, 200], [0.36, 0.30, -150], [-0.36, 0.34, 180] ];
+    disp.classList.add('dispatch-js');
+    var place = function (p) {
+      var W = disp.clientWidth, H = disp.clientHeight;
+      envs.forEach(function (e, i) {
+        var P = paths[i % paths.length], q = c01((p - i * 0.045) / 0.7), qe = 1 - Math.pow(1 - q, 1.7);
+        var ex = P[0] * W, ey = P[1] * H * 0.9, arc = Math.sin(Math.PI * qe) * -H * 0.28;
+        var x = ex * qe, y = ey * qe + arc + (1 - qe) * -H * 0.32;
+        var sc = 0.4 + Math.sin(Math.PI * Math.min(1, qe * 1.05)) * 0.75 + qe * 0.2;
+        e.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + (Math.sin(Math.PI * qe) * 160).toFixed(0) + 'px) rotateY(' + (qe * 540 + i * 30).toFixed(1) + 'deg) rotateX(' + (qe * 160).toFixed(1) + 'deg) rotateZ(' + (qe * P[2]).toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+        e.style.opacity = (c01(q * 8) * (1 - 0.65 * c01((q - 0.85) / 0.15))).toFixed(3);
+      });
+      for (var j = 0; j < trails.length; j++) trails[j].style.strokeDashoffset = (1 - c01(p * 1.4 - j * 0.08)) * 1;
+      var sp = c01((p - 0.62) / 0.14);
+      stamp.style.opacity = sp.toFixed(3);
+      stamp.style.transform = 'translate(-50%,-50%) rotate(-7deg) scale(' + (1 + (1 - sm(sp)) * 0.3).toFixed(3) + ')';
+      disp.classList.toggle('dispatch-done', sp >= 1);
+    };
+    if (reduce) place(1);
+    else addScroller(function (vh) {
+      var c = layoutTop(disp) + disp.offsetHeight / 2 - window.pageYOffset;
+      place(c01((vh * 1.0 - c) / (vh * 0.62)));
+    });
+  }
+
+  /* ---------- 8. "Why now": the window closes as it scrolls into view; the text stays visible through the glass ---------- */
+  var win = document.getElementById('why-window');
+  if (win) {
+    var sashL = win.querySelector('.ww-sash-l'), sashR = win.querySelector('.ww-sash-r');
+    win.classList.add('ww-js');
+    var setWin = function (p) {
+      var open = 1 - p, narrow = window.innerWidth < 760;
+      sashL.style.transform = 'rotateY(' + (-(narrow ? 98 : 104) * open).toFixed(2) + 'deg)';
+      sashR.style.transform = 'rotateY(' + (104 * open).toFixed(2) + 'deg)';
+      win.style.setProperty('--closed', p.toFixed(3));
+      win.classList.toggle('ww-closed', p > 0.995);
+    };
+    if (reduce) setWin(1);
+    else addScroller(function (vh) {
+      var c = layoutTop(win) + win.offsetHeight / 2 - window.pageYOffset;
+      var p = c01((vh * 1.02 - c) / (vh * 0.5));
+      setWin(1 - Math.pow(1 - p, 2.2));
+    });
   }
 })();

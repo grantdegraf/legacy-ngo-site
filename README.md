@@ -36,6 +36,8 @@ Cloudflare Pages accepts files up to 25 MiB each. Keep video files under 22 MiB.
 
 `assets/js/scenes.js` runs the homepage scenes: the book turns to its back cover (`assets/img/wwf-book-back-2026.jpg`) and back when it is first in view, and the laptop in the organisation section opens on scroll and plays the teaser in black and white while in view. With reduced motion nothing moves until a button is pressed.
 
+The same file also runs: the "Read a Sample Chapter" button coming forward over the project paragraph as it passes; the 36 names swirling into place like a tornado above the roster; envelopes spinning away under "Notify me at launch" (EMAIL DISPATCHED, with a note that launch news goes out once publication is confirmed); the "Why now" window closing on scroll with the text visible through the glass; and the founder's full-length photo (`assets/img/founder/grant-full.*`), which turns 360 degrees, pauses and turns again once `assets/img/founder/turn-*.webp` frames are added and `data-count` is set to 12.
+
 ## Reader
 
 `/sample/` opens Chapter 23 on sample page 14. `#p1` through `#p24` deep links remain supported. Section shortcuts lead to contents (3), the author's note (5), chapter (14), map (22), further reading (23), and cover (1).
