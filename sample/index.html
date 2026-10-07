@@ -64,10 +64,23 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
 .reader-next a { display:inline-flex; align-items:center; min-height:44px; color:var(--accent); text-decoration:underline; }
 @media (max-width:760px) { .reader-sections { gap:0 16px; padding:3px 12px; } .reader-sections a { font-size:14px; min-height:40px; } .notice { font-size:12px; } }
 @media (prefers-reduced-motion:no-preference){#sheet.anim{transition:transform .18s ease}}
+/* Page-turning book view (StPageFlip, MIT) */
+#bookwrap{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#3a352e 0%,var(--stage) 70%);padding:18px 64px;display:none;flex-direction:column;justify-content:center;outline:none}
+#bookwrap:focus-visible{box-shadow:inset 0 0 0 3px var(--focus)}
+body.book #bookwrap{display:flex}
+body.book #stage{visibility:hidden}
+body.book .zgrp{display:none}
+.bk{margin:0 auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.5))}
+.bpage{background:#fff;overflow:hidden}
+.bpage img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.bpage.--left{box-shadow:inset -18px 0 24px -16px rgba(0,0,0,.35)}
+.bpage.--right{box-shadow:inset 18px 0 24px -16px rgba(0,0,0,.35)}
+#mode{white-space:nowrap}
+@media (max-width:760px){#bookwrap{padding:10px 8px}body.book .nav button{width:40px;height:40px;opacity:.8}}
 </style>
 </head>
 <body>
-<a class="skip" href="#stage">Skip to the page viewer</a>
+<a class="skip" href="#reader">Skip to the page viewer</a>
 <header>
   <a class="brand" href="/" aria-label="The Legacy Project home"><span class="mark">L</span><span>The Legacy Project<small>legacy.ngo</small></span></a>
   <div class="ttl"><h1><em>Women Without Fear</em> - Sample Chapter</h1>
@@ -76,7 +89,8 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
 </header>
 <nav class="reader-sections" aria-label="Sample sections"><a href="#p14">Start the chapter</a><a href="#p3">Contents</a><a href="#p5">Author’s note</a><a href="#p22">Map</a><a href="#p23">Further reading</a><a href="#p1">Cover</a></nav>
 <div class="notice">Sample selection from the complete book. Chapter 23: Róża Robota. &copy; 2026 Grant de Graf. All rights reserved.</div>
-<main>
+<main id="reader">
+  <div id="bookwrap" tabindex="0" role="group" aria-roledescription="book" aria-label="Sample book. Use left and right arrow keys, or click a page, to turn pages."></div>
   <div id="stage" tabindex="0" role="group" aria-roledescription="page viewer" aria-label="Sample page viewer. Use left and right arrow keys to change page, plus and minus to zoom.">
     <div id="sheet"><img id="pageimg" alt="" decoding="async" draggable="false"></div>
     <div id="spin" aria-hidden="true"></div>
@@ -87,9 +101,12 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
 <div id="reader-next" class="reader-next" hidden><span>Continue exploring <em>Women Without Fear</em>.</span><a href="/#women">Meet more women</a><a href="/#notify">Receive publication news</a></div>
 <footer>
   <div class="grp">
+    <button id="mode" type="button" hidden>Zoom view</button>
+    <span class="grp zgrp">
     <button id="zout" aria-label="Zoom out">&minus;</button>
     <button id="zreset" aria-label="Fit page to screen">Fit</button>
     <button id="zin" aria-label="Zoom in">+</button>
+    </span>
   </div>
   <div class="grp">
     <button id="first" class="desk" aria-label="First page">&laquo;</button>
@@ -99,10 +116,11 @@ footer{border-top:1px solid var(--line);background:var(--paper);padding:8px 16px
     <button id="last" class="desk" aria-label="Last page">&raquo;</button>
   </div>
   <div class="grp">
-    <span class="hint">Swipe, arrow keys, + / - to zoom</span>
+    <span class="hint" id="hint">Swipe, arrow keys, + / - to zoom</span>
     <a class="btn cta" id="enq" href="mailto:info@legacy.ngo?subject=Publisher%20%2F%20Distributor%20enquiry%3A%20Women%20Without%20Fear%20(three-chapter%20sample)&amp;body=Hello%2C%0A%0AI%20am%20writing%20on%20behalf%20of%20(organisation)%20and%20would%20like%20to%20request%20the%20three-chapter%20publisher%20%2F%20distributor%20sample%20of%20Women%20Without%20Fear%20(Chapters%2011%2C%2023%20and%2013).%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you.">Publishers &amp; distributors: request the three-chapter sample</a>
   </div>
 </footer>
+<script src="/assets/js/vendor/page-flip/page-flip.browser.js?v=2.0.7"></script>
 <noscript><p style="padding:16px">This reader needs JavaScript. <a href="mailto:info@legacy.ngo" style="text-decoration:underline">Email info@legacy.ngo</a> for the sample PDF.</p></noscript>
 <script>
 (function(){
@@ -152,6 +170,14 @@ function loadHi(n){
   if(hiLoaded[n]){ if(n===cur&&img.src.indexOf('pages/')<0)img.src=hi(n); return; }
   var t=new Image(); t.onload=function(){hiLoaded[n]=1; if(n===cur)img.src=hi(n);}; t.src=hi(n);
 }
+function ui(n,fromHash,label,n2){
+  count.textContent=label||('Page '+n+' of '+N);
+  document.getElementById('reader-next').hidden=n<21;
+  document.querySelectorAll('.reader-sections a').forEach(function(a){var active=a.hash==='#p'+n||(n2&&a.hash==='#p'+n2); if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.getElementById('prev').disabled=n===1; document.getElementById('next').disabled=n>=N;
+  document.getElementById('jump').value='';
+  if(!fromHash){ try{history.replaceState(null,'','#p'+n)}catch(e){} }
+}
 function show(n,fromHash){
   n=Math.max(1,Math.min(N,n)); cur=n; scale=1; tx=ty=0;
   spin.textContent='Loading page…';
@@ -159,32 +185,35 @@ function show(n,fromHash){
   img.onerror=function(){spin.textContent='Page could not load. Try another page or reload the reader.'};
   img.src=hiLoaded[n]?hi(n):med(n);
   img.alt='Page '+n+' of '+N+'. '+(ALT[n]||'');
-  count.textContent='Page '+n+' of '+N;
-  document.getElementById('reader-next').hidden=n<21;
-  document.querySelectorAll('.reader-sections a').forEach(function(a){var active=a.hash==='#p'+n; if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
-  document.getElementById('prev').disabled=n===1; document.getElementById('next').disabled=n===N;
-  document.getElementById('jump').value='';
+  ui(n,fromHash);
   layout();
   preload(n+1,med); preload(n-1,med); preload(n+2,med);
-  if(!fromHash){ try{history.replaceState(null,'','#p'+n)}catch(e){} }
 }
 function zoomTo(s,cx,cy,anim){
   s=Math.max(1,Math.min(6,s)); var r=stage.getBoundingClientRect();
   var px=(cx==null?r.width/2:cx-r.left)-r.width/2, py=(cy==null?r.height/2:cy-r.top)-r.height/2;
   var k=s/scale; tx=px-(px-tx)*k; ty=py-(py-ty)*k; scale=s; clamp(); apply(anim);
 }
-document.getElementById('prev').onclick=function(){show(cur-1)};
-document.getElementById('next').onclick=function(){show(cur+1)};
-document.getElementById('first').onclick=function(){show(1)};
-document.getElementById('last').onclick=function(){show(N)};
+document.getElementById('prev').onclick=function(){go(cur-1,-1)};
+document.getElementById('next').onclick=function(){go(cur+1,1)};
+document.getElementById('first').onclick=function(){go(1)};
+document.getElementById('last').onclick=function(){go(N)};
 document.getElementById('zin').onclick=function(){zoomTo(scale*1.5,null,null,true)};
 document.getElementById('zout').onclick=function(){zoomTo(scale/1.5,null,null,true)};
 document.getElementById('zreset').onclick=function(){scale=1;tx=ty=0;apply(true)};
-document.getElementById('jump').addEventListener('keydown',function(e){if(e.key==='Enter'){var v=parseInt(this.value,10); if(v)show(v)} e.stopPropagation()});
+document.getElementById('jump').addEventListener('keydown',function(e){if(e.key==='Enter'){var v=parseInt(this.value,10); if(v)go(v)} e.stopPropagation()});
 document.addEventListener('keydown',function(e){
   if(e.target&&/^(INPUT|TEXTAREA|SELECT|BUTTON|A)$/.test(e.target.tagName))return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;
   var k=e.key, step=60;
+  if(pf){
+    if(k==='ArrowRight'||k==='PageDown'||k===' '){go(cur+1,1);e.preventDefault()}
+    else if(k==='ArrowLeft'||k==='PageUp'){go(cur-1,-1);e.preventDefault()}
+    else if(k==='Home'){go(1);e.preventDefault()}
+    else if(k==='End'){go(N);e.preventDefault()}
+    else if(k==='+'||k==='='){setMode('zoom');zoomTo(1.5,null,null,true);e.preventDefault()}
+    return;
+  }
   if(k==='ArrowRight'||k==='PageDown'){ if(scale>1.01&&k==='ArrowRight'&&Math.abs(tx)<(fit*scale-stage.clientWidth)/2+7){tx-=step;clamp();apply(true)} else show(cur+1); e.preventDefault()}
   else if(k==='ArrowLeft'||k==='PageUp'){ if(scale>1.01&&k==='ArrowLeft'&&Math.abs(tx)<(fit*scale-stage.clientWidth)/2+7){tx+=step;clamp();apply(true)} else show(cur-1); e.preventDefault()}
   else if(k==='ArrowUp'&&scale>1.01){ty+=step;clamp();apply(true);e.preventDefault()}
@@ -221,9 +250,82 @@ function end(e){
 }
 stage.addEventListener('pointerup',end); stage.addEventListener('pointercancel',end);
 stage.addEventListener('wheel',function(e){ if(e.ctrlKey||e.metaKey){e.preventDefault(); zoomTo(scale*(e.deltaY<0?1.12:1/1.12),e.clientX,e.clientY,false)} else if(scale>1.01){e.preventDefault(); tx-=e.deltaX; ty-=e.deltaY; clamp(); apply(false)} },{passive:false});
-window.addEventListener('resize',layout);
-window.addEventListener('hashchange',function(){var m=/^#p(\d+)$/.exec(location.hash); if(m)show(+m[1],true)});
-var m=/^#p(\d+)$/.exec(location.hash); show(m?+m[1]:14,true);
+/* ---------- Page-turning book view ---------- */
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var bookWrap=document.getElementById('bookwrap'), modeBtn=document.getElementById('mode'), hintEl=document.getElementById('hint');
+var pf=null, land=false, lastW=0, lastH=0, rt=null;
+function canBook(){return !!(window.St&&window.St.PageFlip)}
+function destroyBook(){ if(pf){ try{pf.destroy()}catch(e){} pf=null } bookWrap.innerHTML='' }
+function bookLabel(idx){
+  var n=idx+1;
+  if(land&&n>1&&n<N) return 'Pages '+n+'-'+(n+1)+' of '+N;
+  return 'Page '+n+' of '+N;
+}
+function onBookFlip(idx){ cur=idx+1; ui(cur,false,bookLabel(idx),(land&&cur>1&&cur<N)?cur+1:0); document.getElementById('next').disabled=cur>=N||(land&&cur>=N-1) }
+function buildBook(n,openFromCover){
+  destroyBook();
+  var cs=getComputedStyle(bookWrap), W=bookWrap.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight), H=bookWrap.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  lastW=bookWrap.clientWidth; lastH=bookWrap.clientHeight;
+  var landPW=Math.min(W/2,H*RATIO), portPW=Math.min(W,H*RATIO);
+  land=W>=560&&landPW>=portPW*0.78;
+  var pw=Math.max(120,Math.floor(land?landPW:portPW)), ph=Math.floor(pw/RATIO);
+  var host=document.createElement('div'); host.className='bk'; bookWrap.appendChild(host);
+  var els=[], order=[];
+  for(var i=1;i<=N;i++){
+    var d=document.createElement('div'); d.className='bpage';
+    if(i===1||i===N)d.setAttribute('data-density','hard');
+    var im=document.createElement('img'); im.alt='Page '+i+' of '+N+'. '+(ALT[i]||''); im.draggable=false; im.decoding='async';
+    im.width=1000; im.height=1428; d.appendChild(im); host.appendChild(d); els.push(d);
+  }
+  // load the pages nearest the destination first
+  for(i=0;i<N;i++)order.push(i); order.sort(function(a,b){return Math.min(Math.abs(a-(n-1)),Math.abs(a))-Math.min(Math.abs(b-(n-1)),Math.abs(b))});
+  order.forEach(function(j){els[j].firstChild.src=med(j+1)});
+  var start=openFromCover?0:n-1;
+  pf=new St.PageFlip(host,{width:pw,height:ph,size:'fixed',showCover:true,usePortrait:true,autoSize:true,drawShadow:true,
+     maxShadowOpacity:.55,flippingTime:reduce?250:1000,mobileScrollSupport:false,startPage:start,swipeDistance:30});
+  pf.on('flip',function(e){onBookFlip(e.data)});
+  pf.loadFromHTML(els);
+  host.style.maxWidth=(land?2*pw:pw)+'px'; host.style.width='100%'; host.style.height=ph+'px';
+  onBookFlip(start);
+  if(openFromCover&&n>1){
+    var cover=els[0].firstChild, target=els[n-1].firstChild, fired=false;
+    var go2=function(){ if(fired||!pf)return; fired=true; setTimeout(function(){ if(pf)pf.flip(n-1) },1100) };
+    var ready=function(im){return im.complete&&im.naturalWidth>0};
+    var wait=function(){ if(ready(cover)&&ready(target))go2(); else setTimeout(wait,80) }; wait();
+    setTimeout(go2,4000);
+  }
+}
+function go(n,dir){
+  n=Math.max(1,Math.min(N,n));
+  if(pf){
+    if(dir===1)pf.flipNext(); else if(dir===-1)pf.flipPrev(); else if(n-1!==pf.getCurrentPageIndex())pf.flip(n-1);
+    return;
+  }
+  show(n);
+}
+function setMode(m,n,openFromCover){
+  if(m==='book'&&!canBook())m='zoom';
+  n=n||cur;
+  document.body.classList.toggle('book',m==='book');
+  modeBtn.hidden=!canBook();
+  modeBtn.textContent=m==='book'?'Zoom view':'Book view';
+  modeBtn.setAttribute('aria-label',m==='book'?'Switch to the single-page zoom view':'Switch to the page-turning book view');
+  if(hintEl)hintEl.textContent=m==='book'?'Click a page or drag its corner to turn':'Swipe, arrow keys, + / - to zoom';
+  if(m==='book'){ buildBook(n,!!openFromCover) } else { destroyBook(); show(n) }
+}
+modeBtn.onclick=function(){
+  var m=pf?'zoom':'book'; try{localStorage.setItem('legacy-ngo:reader-mode',m)}catch(e){}
+  setMode(m,cur,false); (pf?bookWrap:stage).focus({preventScroll:true});
+};
+window.addEventListener('resize',function(){
+  if(!pf){layout();return}
+  clearTimeout(rt); rt=setTimeout(function(){ if(pf&&(Math.abs(bookWrap.clientWidth-lastW)>2||Math.abs(bookWrap.clientHeight-lastH)>40))buildBook(cur,false) },220);
+});
+window.addEventListener('hashchange',function(){var m=/^#p(\d+)$/.exec(location.hash); if(!m)return; if(pf)go(+m[1]); else show(+m[1],true)});
+var m=/^#p(\d+)$/.exec(location.hash), first=m?+m[1]:14, pref=null;
+try{pref=localStorage.getItem('legacy-ngo:reader-mode')}catch(e){}
+if(canBook()&&pref!=='zoom'&&!reduce){ ui(first,true); setMode('book',first,true) }
+else { modeBtn.hidden=!canBook(); modeBtn.textContent='Book view'; show(first,true) }
 })();
 </script>
 </body>

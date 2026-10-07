@@ -34,7 +34,7 @@
   root.classList.add('s3d');
 
   // 1. Hero book cover: wrap for sheen + pointer tilt
-  var cover = document.querySelector('.hero-cover');
+  var cover = document.querySelector('.book3d-body') || document.querySelector('.hero-cover');
   var coverWrap = null;
   if (cover) {
     coverWrap = document.createElement('span');

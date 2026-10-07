@@ -34,9 +34,13 @@ Cloudflare Pages accepts files up to 25 MiB each. Keep video files under 22 MiB.
 
 `assets/js/scroll3d.js` adds scroll-linked 3D to the homepage: the book cover, fact cards, headings, story paragraphs, trailer screen, portrait cards, a desktop sticky portrait stage (native CSS sticky) and the name grid above the roster. The page always scrolls natively; every element settles flat in the middle of the viewport. It is off with reduced motion, and the "Pause motion" button stops it. Without JavaScript the page shows the static layout.
 
+`assets/js/scenes.js` runs the homepage scenes: the book turns to its back cover (`assets/img/wwf-book-back-2026.jpg`) and back when it is first in view, and the laptop in the organisation section opens on scroll and plays the teaser in black and white while in view. With reduced motion nothing moves until a button is pressed.
+
 ## Reader
 
 `/sample/` opens Chapter 23 on sample page 14. `#p1` through `#p24` deep links remain supported. Section shortcuts lead to contents (3), the author's note (5), chapter (14), map (22), further reading (23), and cover (1).
+
+The reader opens as a page-turning book (StPageFlip 2.0.7, MIT licence, self-hosted in `assets/js/vendor/page-flip/` with its LICENSE): two-page spreads on wide screens, single pages on phones. "Zoom view" switches to the single-page zoom and pan viewer; the choice is remembered in the browser. Reduced motion starts in the zoom viewer.
 
 ## Contact
 
