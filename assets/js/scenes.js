@@ -173,6 +173,9 @@
     if (urls.length >= 3) {
       var seq = new Sequence(fam, urls), flash = fam.querySelector('.gen-flash'), yearEl = fam.querySelector('.gen-year');
       var famBtn = fam.querySelector('.seq-replay'), famDone = false, yearRaf = 0;
+      // The still starts on the first frame so the finished photograph is not revealed before the time-lapse plays.
+      var lastUrl = urls[urls.length - 1], showLast = function () { seq.still.src = lastUrl; };
+      if (reduce) showLast();
       var setYear = function (y) { if (yearEl && y) yearEl.textContent = String(Math.round(y)); };
       var tweenYear = function (a, b, ms) {
         cancelAnimationFrame(yearRaf); if (!a || !b) return;
@@ -197,7 +200,7 @@
           for (var k = 5; k < urls.length; k++) (function (k, at) {
             seq.at(at, function () { seq.show(k, Math.min(520, step * 0.6), true); tweenYear(years[k - 1], years[k], step * 0.6); });
           })(k, t + (k - 5) * step);
-          seq.at(11400, function () { fam.classList.remove('gen-playing'); setYear(years[years.length - 1]); seq.end(); });
+          seq.at(11400, function () { fam.classList.remove('gen-playing'); setYear(years[years.length - 1]); showLast(); seq.end(); });
         });
       };
       if (famBtn) { famBtn.hidden = false; famBtn.addEventListener('click', play); }
