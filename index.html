@@ -755,7 +755,17 @@
  function metrics(){return {start:journey.getBoundingClientRect().top+scrollY,travel:Math.max(1,journey.offsetHeight-stage.offsetHeight)}}
  /* Videos load only when the section is within ~1.5 screens (never on a data-saver connection until the visitor acts); later films load before their chapters need them. */
  function wake(){near=true}
- function load(i,force){if(!near&&!force)return;const v=videos[i],source=v.querySelector('source');if(source.dataset.src){loading.textContent='Preparing the film…';source.src=source.dataset.src;delete source.dataset.src;v.preload=stacked?'metadata':'auto';v.load()}}
+ /* Cloudflare Pages serves these files whole (no byte-range support), which leaves a streamed <video> unable to seek or sometimes stuck at "Preparing". So each film is fetched completely into memory first and played from there; if that fails it falls back to the plain file URL. Stacked (landscape phone) mode keeps the plain URL with native controls. */
+ function direct(v,source,url){source.src=url;v.preload=stacked?'metadata':'auto';v.load()}
+ function fetchFilm(i,v,source,url){
+  let done=false;const fallback=()=>{if(done)return;done=true;direct(v,source,url)};
+  if(!window.fetch||!window.URL||!URL.createObjectURL||!window.Response){fallback();return}
+  fetch(url).then(r=>{if(!r.ok)throw new Error(r.status);const total=+r.headers.get('content-length')||0,type=r.headers.get('content-type')||'video/mp4';
+   if(!r.body||!r.body.getReader)return r.blob();
+   const reader=r.body.getReader(),chunks=[];let got=0;
+   const pump=()=>reader.read().then(c=>{if(c.done)return new Blob(chunks,{type:type.split(';')[0]});chunks.push(c.value);got+=c.value.length;if(total&&videos[chapter]===v&&!v.readyState)loading.textContent='Preparing the film… '+Math.min(99,Math.round(got/total*100))+'%';return pump()});
+   return pump()}).then(blob=>{if(done)return;done=true;source.src=URL.createObjectURL(blob);v.preload='auto';v.load()}).catch(fallback)}
+ function load(i,force){if(!near&&!force)return;const v=videos[i],source=v.querySelector('source');if(source.dataset.src){const url=source.dataset.src;delete source.dataset.src;loading.textContent='Preparing the film…';if(stacked)direct(v,source,url);else fetchFilm(i,v,source,url)}}
  function pauseVideos(){videos.forEach(v=>v.pause());autoVideo=-1}
  function setAuto(value){auto=value;if(value)autoY=scrollY;play.textContent=value?'Pause':p>=.999?'Replay':'Play';if(!value)pauseVideos();last=0;request()}
  /* Automatic playback never moves the page, so any scroll while it runs is the visitor taking control. */
