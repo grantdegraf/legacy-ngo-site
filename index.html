@@ -747,7 +747,7 @@
  const root=document.getElementById('legacy-auschwitz-story');if(!root||root.dataset.initialized)return;root.dataset.initialized='true';
  const journey=root.querySelector('.la-journey'),stage=root.querySelector('.la-stage'),scenes=[...root.querySelectorAll('.la-scene')],videos=scenes.map(s=>s.querySelector('video')),buttons=[...root.querySelectorAll('[data-la-chapter]')],bars=[...root.querySelectorAll('.la-track span')],play=root.querySelector('.la-play'),loading=root.querySelector('.la-load'),announce=root.querySelector('.la-sr'),header=document.querySelector('header.nav');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,saveData=!!(navigator.connection&&navigator.connection.saveData);
- let p=0,target=0,auto=false,visible=false,started=false,userPaused=false,last=0,raf=0,chapter=0,anchor=null,autoVideo=-1,near=false,autoY=0,armT=0,lastScroll=-1e9;
+ let p=0,target=0,auto=false,visible=false,started=false,userPaused=false,last=0,raf=0,chapter=0,anchor=null,autoVideo=-1,near=false,autoY=0,armT=0,lastScroll=-1e9,autoT0=0,why='',dbg=null;
  /* On short screens (landscape phones) a pinned stage cannot fit text, film and controls, so the three chapters stack and each film has its own native controls. */
  const stackedMQ=matchMedia('(max-height:520px)');let stacked=stackedMQ.matches;
  const duration=44,clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),ease=v=>{v=clamp(v);return v*v*(3-2*v)};
@@ -767,17 +767,17 @@
    return pump()}).then(blob=>{if(done)return;done=true;source.src=URL.createObjectURL(blob);v.preload='auto';v.load()}).catch(fallback)}
  function load(i,force){if(!near&&!force)return;const v=videos[i],source=v.querySelector('source');if(source.dataset.src){const url=source.dataset.src;delete source.dataset.src;loading.textContent='Preparing the film…';if(stacked)direct(v,source,url);else fetchFilm(i,v,source,url)}}
  function pauseVideos(){videos.forEach(v=>v.pause());autoVideo=-1}
- function setAuto(value){auto=value;if(value)autoY=scrollY;play.textContent=value?'Pause':p>=.999?'Replay':'Play';if(!value)pauseVideos();last=0;request()}
+ function setAuto(value){auto=value;if(value){autoY=scrollY;autoT0=performance.now()}play.textContent=value?'Pause':p>=.999?'Replay':'Play';if(!value)pauseVideos();last=0;request()}
  /* Automatic playback never moves the page, so any scroll while it runs is the visitor taking control. */
  function freeze(){anchor={y:auto?autoY:scrollY,p};target=p}
- function takeover(){if(!auto)return;freeze();userPaused=true;setAuto(false)}
+ function takeover(r){if(!auto)return;why=r||'takeover';freeze();userPaused=true;setAuto(false)}
  /* Scroll position -> film position. Without an anchor the mapping is the natural one. After a takeover it is continuous with where the film was (no snapping back) and still reaches 0 at the start and 1 at the end of the pinned stage. */
  function mapScroll(){const m=metrics();if(!anchor)return (scrollY-m.start)/m.travel;const y0=m.start,y1=m.start+m.travel,y=clamp(scrollY,y0,y1),ay=clamp(anchor.y,y0,y1);return y>=ay?anchor.p+(1-anchor.p)*(y-ay)/Math.max(1,y1-ay):anchor.p*(y-y0)/Math.max(1,ay-y0)}
  function readScroll(){target=clamp(mapScroll());request()}
  /* Start once the stage is substantially visible and the visitor has stopped scrolling, unless they have already scrolled well past the arrival chapter. */
- function startAuto(){if(stacked||!visible||userPaused||reduced||saveData||started||p>.3||videos[0].readyState<2||performance.now()-lastScroll<300)return;started=true;setAuto(true)}
+ function startAuto(){if(stacked||!visible||userPaused||reduced||saveData||started||p>.4||videos[0].readyState<2||performance.now()-lastScroll<300)return;started=true;setAuto(true)}
  function armAuto(){clearTimeout(armT);if(stacked||started||userPaused||reduced||saveData)return;armT=setTimeout(startAuto,350)}
- function alignNative(i,local){const v=videos[i];if(autoVideo===i)return;pauseVideos();autoVideo=i;if(Number.isFinite(v.duration)){v.currentTime=Math.min(v.duration-.08,local*v.duration);v.playbackRate=v.duration/(duration/3*.84)}const attempt=v.play();if(attempt&&attempt.catch)attempt.catch(()=>{userPaused=true;setAuto(false);loading.hidden=true;play.textContent='Play'})}
+ function alignNative(i,local){const v=videos[i];if(autoVideo===i)return;pauseVideos();autoVideo=i;if(Number.isFinite(v.duration)){v.currentTime=Math.min(v.duration-.08,local*v.duration);v.playbackRate=v.duration/(duration/3*.84)}const attempt=v.play();if(attempt&&attempt.catch)attempt.catch(err=>{why='play() rejected: '+(err&&err.name);userPaused=true;setAuto(false);loading.hidden=true;play.textContent='Play'})}
  function update(){if(stacked){loading.hidden=true;return}const i=Math.min(2,Math.floor(p*3)),phase=p*3-i,next=i<2&&phase>.9?i+1:i,blend=i<2?ease((phase-.9)/.1):0;
   if(p>0)wake();load(i);if(phase>.6&&i<2)load(i+1);
   const focus=blend>.5?next:i;if(focus!==chapter){chapter=focus;buttons.forEach((b,j)=>{if(j===focus)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});announce.textContent='Scene '+(focus+1)+': '+['The arrival','The selection','The revolt'][focus]}
@@ -799,11 +799,12 @@
  videos.forEach(v=>{v.addEventListener('loadeddata',()=>{loading.hidden=true;armAuto();request()});v.addEventListener('seeked',request);const fail=()=>{loading.hidden=false;loading.textContent='Film unavailable. You can still read the story below.';if(auto)setAuto(false)};v.addEventListener('error',fail);const src=v.querySelector('source');if(src)src.addEventListener('error',()=>{if(src.getAttribute('src'))fail()})});
  buttons.forEach((b,i)=>b.addEventListener('click',()=>{takeover();userPaused=true;anchor=null;wake();target=p=(i+.05)/3;load(i);const m=metrics();window.scrollTo({top:m.start+m.travel*p,behavior:'instant'});update();request()}));
  play.addEventListener('click',()=>{userPaused=true;if(auto){freeze();setAuto(false);return}wake();if(p>=.999){p=target=0;anchor=null}load(Math.min(2,Math.floor(p*3)));started=true;setAuto(true)});
- root.querySelector('.la-skip').addEventListener('click',()=>{takeover();anchor=null});
- ['wheel','touchstart','keydown'].forEach(event=>window.addEventListener(event,e=>{if(!auto)return;if(e.target&&e.target.closest&&e.target.closest('button,a,input,select,textarea'))return;if(event!=='keydown'||['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))takeover()},{passive:true}));
- window.addEventListener('scroll',()=>{lastScroll=performance.now();if(auto&&Math.abs(scrollY-autoY)>2)takeover();readScroll();if(!started)armAuto()},{passive:true});
+ root.querySelector('.la-skip').addEventListener('click',()=>{takeover('skip');anchor=null});
+ ['wheel','touchstart','keydown'].forEach(event=>window.addEventListener(event,e=>{if(!auto)return;if(e.target&&e.target.closest&&e.target.closest('button,a,input,select,textarea'))return;if(performance.now()-autoT0<900)return;if(event==='wheel'&&Math.abs(e.deltaY)+Math.abs(e.deltaX)<3)return;if(event!=='keydown'||['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))takeover(event)},{passive:true}));
+ window.addEventListener('scroll',()=>{lastScroll=performance.now();if(auto&&Math.abs(scrollY-autoY)>2)takeover('scroll moved '+Math.round(scrollY-autoY)+'px');readScroll();if(!started)armAuto()},{passive:true});
  window.addEventListener('resize',()=>{setNav();readScroll()});
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&auto){freeze();setAuto(false)}});
+ if(/[?&]la-debug/.test(location.search)){dbg=document.createElement('pre');dbg.style.cssText='position:fixed;left:8px;bottom:8px;z-index:99999;margin:0;padding:8px 10px;background:#000c;color:#9f9;font:11px/1.4 monospace;max-width:92vw;white-space:pre-wrap;pointer-events:none';document.body.appendChild(dbg);setInterval(()=>{dbg.textContent=['reduced='+reduced,'saveData='+saveData,'stacked='+stacked,'visible='+visible,'near='+near,'started='+started,'userPaused='+userPaused,'auto='+auto,'v0.readyState='+videos[0].readyState,'p='+p.toFixed(3),'hidden='+document.hidden,'lastEvent='+(why||'none')].join('\n')},250)}
  setNav();applyMode();update();readScroll();
 })();
 </script>
